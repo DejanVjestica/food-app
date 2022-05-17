@@ -5,7 +5,6 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import headerStyles from './Header.module.scss'
 import CartStyles from './CartButton.module.scss'
 
-import { Stage } from '../Stage/Stage'
 import { Button } from '../../UI/Button/Button'
 import { Wrapper } from '../../Helpers/Wrapper/Wrapper'
 
@@ -33,7 +32,6 @@ export const Header = () => {
 					</span>
 				</Button>
 			</Wrapper>
-			<Stage></Stage>
 		</>
 	)
 }
