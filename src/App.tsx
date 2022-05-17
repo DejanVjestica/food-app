@@ -1,6 +1,11 @@
 import React from 'react'
-import styles from './App.module.scss'
+
+import { Header } from './components/Layout/Header/Header'
 
 export const App = () => {
-	return <div className="App"></div>
+	return (
+		<>
+			<Header />
+		</>
+	)
 }
