@@ -4,5 +4,7 @@
 	"semi": false,
 	"singleQuote": true,
 	"useTabs": true,
-	"bracketSameLine": true
+	"bracketSameLine": true,
+	"editor.wordWrap": "bounded",
+	"printWidth": 160
 }
