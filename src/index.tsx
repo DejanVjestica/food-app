@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom/client'
 import './index.scss'
 import { App } from './App'
 import reportWebVitals from './reportWebVitals'
-import { SourceSizesProvider } from './context/sizes-context'
+import { SrcSetProvider } from './context/srcSet-context'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
 	<React.StrictMode>
-		<SourceSizesProvider>
+		<SrcSetProvider>
 			<App />
-		</SourceSizesProvider>
+		</SrcSetProvider>
 	</React.StrictMode>
 )
 
