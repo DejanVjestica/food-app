@@ -22,17 +22,10 @@ const srcsetArr = [
 	{ src: 'https://via.placeholder.com/3200x1200', imageWidth: '3200w' }
 ]
 
-const srcSetString = srcsetArr
-	.map(({ src, imageWidth }) => `${src} ${imageWidth}`)
-	.join(', ')
-
 export const Stage = () => {
 	return (
 		<Wrapper className={styles.stage}>
-			<Img
-				src={'https://via.placeholder.com/200x75'}
-				alt="Alternative text that describes the image"
-				srcSet={srcSetString}></Img>
+			<Img src={'https://via.placeholder.com/200x75'} alt="Alternative text that describes the image" srcSet={srcsetArr}></Img>
 		</Wrapper>
 	)
 }
