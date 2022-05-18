@@ -1,13 +1,10 @@
 .stage {
 	padding-top: 5rem;
 
-	> picture {
-		> img {
-			width: 110%;
-			object-fit: cover;
-			overflow: hidden;
-			transform: rotateZ(-5deg) translateY(-4rem)
-				translateX(-1rem);
-		}
+	.stage__image {
+		width: 110%;
+		object-fit: cover;
+		overflow: hidden;
+		transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
 	}
 }

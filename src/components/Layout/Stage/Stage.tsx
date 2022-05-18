@@ -25,7 +25,11 @@ const srcsetArr = [
 export const Stage = () => {
 	return (
 		<Wrapper className={styles.stage}>
-			<Img src={'https://via.placeholder.com/200x75'} alt="Alternative text that describes the image" srcSet={srcsetArr}></Img>
+			<Img
+				className={styles.stage__image}
+				src={'https://via.placeholder.com/200x75'}
+				alt="Alternative text that describes the image"
+				srcSet={srcsetArr}></Img>
 		</Wrapper>
 	)
 }
