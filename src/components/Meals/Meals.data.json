@@ -2,7 +2,7 @@
 	{
 		"id": 1,
 		"name": "Pizza",
-		"price": "10",
+		"price": 10,
 		"image": {
 			"src": "https://via.placeholder.com/200x200",
 			"alt": "pizza",
@@ -16,7 +16,7 @@
 	{
 		"id": 2,
 		"name": "Pasta",
-		"price": "15",
+		"price": 15,
 		"image": {
 			"src": "https://via.placeholder.com/200x200",
 			"alt": "Pasta",
@@ -30,7 +30,7 @@
 	{
 		"id": 3,
 		"name": "Salad",
-		"price": "20",
+		"price": 20,
 		"image": {
 			"src": "https://via.placeholder.com/200x200",
 			"alt": "Salad",
@@ -44,7 +44,7 @@
 	{
 		"id": 4,
 		"name": "Soup",
-		"price": "25",
+		"price": 25,
 		"image": {
 			"src": "https://via.placeholder.com/200x200",
 			"alt": "Soup",
@@ -58,7 +58,7 @@
 	{
 		"id": 5,
 		"name": "Cake",
-		"price": "30",
+		"price": 30,
 		"image": {
 			"src": "https://via.placeholder.com/200x200",
 			"alt": "Cake",
