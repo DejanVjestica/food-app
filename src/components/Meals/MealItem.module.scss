@@ -1,0 +1,42 @@
+.meal-item__list-item {
+	display: flex;
+	margin: 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid #ccc;
+}
+
+.meal-item__list-item {
+	h3 {
+		margin: 0 0 0.25rem 0;
+	}
+}
+
+.meal-item__image {
+	object-fit: cover;
+	width: 150px;
+	height: auto;
+
+	> img {
+		width: 100%;
+		height: auto;
+	}
+}
+
+.meal-item__content {
+	margin-left: 2rem;
+
+	h3 {
+		margin: 0;
+	}
+}
+
+.meal-item__description {
+	font-style: italic;
+}
+
+.meal-item__price {
+	margin-top: 0.25rem;
+	font-weight: bold;
+	color: #ad5502;
+	font-size: 1.25rem;
+}
