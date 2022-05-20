@@ -11,7 +11,7 @@ type CartContextType = {
 	isModalOpen: boolean
 	openModal: () => void
 	closeModal: () => void
-	// addItem: () => void
+	addItem: (meal: CartItem) => void
 	// removeItem: () => void
 	// clearItemFromCart: () => void
 	// clearCart: () => void
@@ -21,8 +21,8 @@ export const CartContext = createContext({
 	cartItems: [],
 	isModalOpen: false,
 	openModal: () => {},
-	closeModal: () => {}
-	// addItem: () => {},
+	closeModal: () => {},
+	addItem: () => {}
 	// removeItem: () => {},
 	// clearItemFromCart: () => {},
 	// clearCart: () => {}
@@ -34,6 +34,7 @@ type CartProviderProps = {
 
 export const CartProvider = ({ children }: CartProviderProps) => {
 	const [isModalOpen, setisModalOpen] = useState<boolean>(false)
+	const [cartItems, setCartItems] = useState<CartItem[]>([])
 
 	document.addEventListener('keydown', (e: KeyboardEvent) => {
 		if (e.key === 'Escape') {
@@ -49,8 +50,19 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 		setisModalOpen(false)
 	}
 
+	const addItemHandler = (meal: CartItem) => {
+		setCartItems([...cartItems, meal])
+	}
+
 	return (
-		<CartContext.Provider value={{ cartItems: [], isModalOpen, openModal: openModalHandler, closeModal: closeModalHandler }}>
+		<CartContext.Provider
+			value={{
+				cartItems,
+				isModalOpen,
+				openModal: openModalHandler,
+				closeModal: closeModalHandler,
+				addItem: addItemHandler
+			}}>
 			{children}
 		</CartContext.Provider>
 	)

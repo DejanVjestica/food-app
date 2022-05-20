@@ -26,6 +26,7 @@ type MealItemProps = {
 
 export const MealItem = (props: MealItemProps) => {
 	const price = `€${props.meal.price.toFixed(2)}`
+
 	return (
 		<li className={styles['meal-item__list-item']}>
 			<div className={styles['meal-item__image']}>
@@ -38,7 +39,7 @@ export const MealItem = (props: MealItemProps) => {
 					<strong>Price:</strong> {price}
 				</p>
 			</div>
-			<MealItemForm></MealItemForm>
+			<MealItemForm meal={props.meal}></MealItemForm>
 		</li>
 	)
 }
