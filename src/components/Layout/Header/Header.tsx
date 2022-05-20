@@ -12,7 +12,7 @@ import { Wrapper } from '../../Helpers/Wrapper/Wrapper'
 import { CartContext } from '../../../context/cart-context'
 
 export const Header = () => {
-	const { openModal } = useContext(CartContext)
+	const { openModal, cartItems } = useContext(CartContext)
 
 	return (
 		<>
@@ -23,7 +23,7 @@ export const Header = () => {
 						<FontAwesomeIcon icon={faCartShopping} />
 					</span>
 					<span>Your cart</span>
-					<span className={CartStyles.badge}>3</span>
+					<span className={CartStyles.badge}>{cartItems.length}</span>
 				</Button>
 			</Wrapper>
 		</>
