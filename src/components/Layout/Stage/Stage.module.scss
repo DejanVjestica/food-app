@@ -1,10 +1,12 @@
 .stage {
 	padding-top: 5rem;
+	width: 100%;
+	overflow: hidden;
+	z-index: 0;
 
 	.stage__image {
-		width: 110%;
 		object-fit: cover;
-		overflow: hidden;
-		transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
+		transform: rotateZ(-4deg) translateY(-4rem) translateX(-1rem);
+		width: 110%;
 	}
 }
