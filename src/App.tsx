@@ -9,7 +9,7 @@ import { Cart } from './components/Cart/Cart'
 import styles from './App.module.scss'
 
 // Contexts
-import { CartContext } from './context/cart-context'
+import { CartContext } from './context/Cart/cart-context'
 
 export const App = () => {
 	const { isModalOpen } = useContext(CartContext)

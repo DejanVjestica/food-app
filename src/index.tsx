@@ -5,7 +5,7 @@ import { App } from './App'
 import reportWebVitals from './reportWebVitals'
 // contexts
 import { SrcSetProvider } from './context/srcSet-context'
-import { CartProvider } from './context/cart-context'
+import { CartProvider } from './context/Cart/cart-provider'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
