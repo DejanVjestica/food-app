@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
@@ -9,10 +9,10 @@ import { Button } from '../../UI/Button/Button'
 import { Wrapper } from '../../Helpers/Wrapper/Wrapper'
 
 // contexts
-import { CartContext } from '../../../context/cart-context'
+import { CartContext } from '../../../context/Cart/cart-context'
 
 export const Header = () => {
-	const { openModal, cartItems } = useContext(CartContext)
+	const { openModal, totalOfItems } = useContext(CartContext)
 
 	return (
 		<>
@@ -23,7 +23,7 @@ export const Header = () => {
 						<FontAwesomeIcon icon={faCartShopping} />
 					</span>
 					<span>Your cart</span>
-					<span className={CartStyles.badge}>{cartItems.length}</span>
+					<span className={CartStyles.badge}>{totalOfItems}</span>
 				</Button>
 			</Wrapper>
 		</>

@@ -9,7 +9,7 @@ import { Wrapper } from '../Helpers/Wrapper/Wrapper'
 import styles from './CartItem.module.scss'
 
 // context
-import { CartItemType } from '../../context/Cart/cart-context.types'
+import { CartItemType } from '../../types/cart.types'
 
 type CartItemProps = React.LiHTMLAttributes<HTMLLIElement> & {
 	item: CartItemType

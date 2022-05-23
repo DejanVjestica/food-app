@@ -2,7 +2,7 @@
 import { createContext } from 'react'
 
 // Types
-import { CartContextType } from './cart-context.types'
+import { CartContextType } from '../../types/cart.types'
 
 export const CartContext = createContext({
 	cartItems: [],

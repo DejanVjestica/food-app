@@ -1,12 +1,54 @@
-import React, { useState } from 'react'
+/* eslint-disable no-tabs */
+import React, { useState, useReducer } from 'react'
 import { CartContext } from './cart-context'
 
 // Types
-import { CartItem, CartProviderProps } from './cart-context.types'
+import { CartItemType, CartProviderProps, CartReducerState, CartRedcerAction } from '../../types/cart.types'
+
+const defaultState: CartReducerState = {
+	cartItems: []
+}
+
+const cartReducer = (state: CartReducerState, action: CartRedcerAction) => {
+	let existingMeal, newMeal, newMealsArray
+
+	switch (action.type) {
+		case 'ADD_ITEM':
+			existingMeal = state.cartItems.find((item) => item.id === action.payload.id)
+
+			if (existingMeal) {
+				newMeal = state.cartItems.map((item) => {
+					if (item.id === action.payload.id) {
+						return {
+							...item,
+							quantity: item.quantity + action.payload.quantity
+						}
+					}
+					return item
+				})
+				console.log(newMeal)
+
+				newMealsArray = [...newMeal]
+			} else {
+				newMealsArray = [...state.cartItems, action.payload]
+			}
+
+			return {
+				cartItems: newMealsArray
+			}
+		case 'REMOVE_ITEM':
+			return {
+				cartItems: []
+			}
+		default:
+			return defaultState
+	}
+}
 
 export const CartProvider = ({ children }: CartProviderProps) => {
 	const [isModalOpen, setisModalOpen] = useState<boolean>(false)
-	const [cartItems, setCartItems] = useState<CartItem[]>([])
+
+	const [state, dispatch] = useReducer(cartReducer, defaultState)
 
 	document.addEventListener('keydown', (e: KeyboardEvent) => {
 		if (e.key === 'Escape') {
@@ -22,37 +64,19 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 		setisModalOpen(false)
 	}
 
-	const addItemHandler = (meal: CartItem) => {
-		const existingMeal = cartItems.find((item) => item.id === meal.id)
-
-		if (existingMeal) {
-			setCartItems(
-				cartItems.map((item) => {
-					if (item.id === meal.id) {
-						return {
-							...item,
-							quantity: item.quantity + meal.quantity
-						}
-					}
-					return item
-				})
-			)
-		} else {
-			setCartItems([...cartItems, meal])
-		}
+	const addItemHandler = (meal: CartItemType) => {
+		dispatch({ type: 'ADD_ITEM', payload: meal })
 	}
 
 	const removeItemHandler = (id: number) => {
-		setCartItems((prevState) => {
-			return prevState.filter((item) => item.id !== id)
-		})
+		dispatch({ type: 'REMOVE_ITEM', payload: id })
 	}
 
 	return (
 		<CartContext.Provider
 			value={{
-				cartItems,
-				totalOfItems: cartItems.reduce((acc, curr) => {
+				cartItems: state.cartItems,
+				totalOfItems: state.cartItems.reduce((acc, curr) => {
 					return acc + curr.quantity
 				}, 0),
 				isModalOpen,

@@ -10,20 +10,20 @@ import { Modal } from '../UI/Modal/Modal'
 import styles from './Cart.module.scss'
 
 // context
-import { CartContext } from '../../context/cart-context'
+import { CartContext } from '../../context/Cart/cart-context'
 
 export const Cart = () => {
 	const { closeModal, cartItems } = useContext(CartContext)
 
 	const orderItems = cartItems.map((item) => <CartItem key={item.id} item={item} />)
-	const totalPrice = cartItems.reduce((acc, item) => acc + item.price, 0)
+	const totalPriceEuro = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
 
 	return (
 		<Modal element={'#cart-modal-root'}>
 			<ul className={styles.cart__items}>{orderItems}</ul>
 			<p className={styles.cart__total}>
 				<span>Total amount</span>
-				<span>{totalPrice}</span>
+				<span>{`${totalPriceEuro.toFixed(2)} €`}</span>
 			</p>
 			<Wrapper as="div" className={styles.cart__actions}>
 				<Button onClick={closeModal} className={styles.button__close}>
