@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 
@@ -9,6 +9,9 @@ import { Wrapper } from '../Helpers/Wrapper/Wrapper'
 import styles from './CartItem.module.scss'
 
 // context
+import { CartContext } from '../../context/Cart/cart-context'
+
+// types
 import { CartItemType } from '../../types/cart.types'
 
 type CartItemProps = React.LiHTMLAttributes<HTMLLIElement> & {
@@ -16,9 +19,13 @@ type CartItemProps = React.LiHTMLAttributes<HTMLLIElement> & {
 }
 
 export const CartItem = ({ item }: CartItemProps) => {
+	const { changeQuantity } = useContext(CartContext)
 	const price = item.price * item.quantity
 	const priceEuro = `${price.toFixed(2)} €`
 
+	const quantityChangeHandler = (e: React.MouseEvent<HTMLElement>): void => {
+		changeQuantity(e.currentTarget.getAttribute('value') as string, item.id)
+	}
 	return (
 		<li className={styles['cart-item']}>
 			<p className={styles['cart-item__quantity']}>{item.quantity}</p>
@@ -27,10 +34,10 @@ export const CartItem = ({ item }: CartItemProps) => {
 
 			<Wrapper as="div" className={styles['cart-item__actions']}>
 				<Button className={styles['cart-item__remove']}>Add note</Button>
-				<Button className={styles['cart-item__remove-one']}>
+				<Button value="REMOVE" className={styles['cart-item__remove-one']} onClick={quantityChangeHandler}>
 					<FontAwesomeIcon icon={faMinus} />
 				</Button>
-				<Button className={styles['cart-item__add-one']}>
+				<Button value="ADD" className={styles['cart-item__add-one']} onClick={quantityChangeHandler}>
 					<FontAwesomeIcon icon={faPlus} />
 				</Button>
 			</Wrapper>

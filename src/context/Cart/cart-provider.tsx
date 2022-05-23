@@ -4,37 +4,38 @@ import { CartContext } from './cart-context'
 
 // Types
 import { CartItemType, CartProviderProps, CartReducerState, CartRedcerAction } from '../../types/cart.types'
+import { log } from 'console'
 
 const defaultState: CartReducerState = {
 	cartItems: []
 }
 
-const cartReducer = (state: CartReducerState, action: CartRedcerAction) => {
-	let existingMeal, newMeal, newMealsArray
+const addItemToCart = (newItem: CartItemType, state: CartReducerState) => {
+	let newMeal
+	const existingMeal = state.cartItems.find((item) => item.id === newItem.id)
 
+	if (existingMeal) {
+		newMeal = state.cartItems.map((item) => {
+			if (item.id === newItem.id) {
+				return {
+					...item,
+					quantity: item.quantity + newItem.quantity
+				}
+			}
+			return item
+		})
+
+		return [...newMeal]
+	} else {
+		return [...state.cartItems, newItem]
+	}
+}
+
+const cartReducer = (state: CartReducerState, action: CartRedcerAction) => {
 	switch (action.type) {
 		case 'ADD_ITEM':
-			existingMeal = state.cartItems.find((item) => item.id === action.payload.id)
-
-			if (existingMeal) {
-				newMeal = state.cartItems.map((item) => {
-					if (item.id === action.payload.id) {
-						return {
-							...item,
-							quantity: item.quantity + action.payload.quantity
-						}
-					}
-					return item
-				})
-				console.log(newMeal)
-
-				newMealsArray = [...newMeal]
-			} else {
-				newMealsArray = [...state.cartItems, action.payload]
-			}
-
 			return {
-				cartItems: newMealsArray
+				cartItems: addItemToCart(action.payload, state)
 			}
 		case 'REMOVE_ITEM':
 			return {
@@ -72,6 +73,11 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 		dispatch({ type: 'REMOVE_ITEM', payload: id })
 	}
 
+	const changeQuantityHandler = (action: string, id: number) => {
+		// dispatch({ type: 'REMOVE_ITEM', payload: id })
+		console.log('changeQuantityHandler', action, id)
+	}
+
 	return (
 		<CartContext.Provider
 			value={{
@@ -83,7 +89,8 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 				openModal: openModalHandler,
 				closeModal: closeModalHandler,
 				addItem: addItemHandler,
-				removeItem: removeItemHandler
+				removeItem: removeItemHandler,
+				changeQuantity: changeQuantityHandler
 			}}>
 			{children}
 		</CartContext.Provider>

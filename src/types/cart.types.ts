@@ -13,6 +13,7 @@ export type CartContextType = {
 	closeModal: () => void
 	addItem: (meal: CartItemType) => void
 	removeItem: (id: number) => void
+	changeQuantity: (action: string, id: number) => void
 }
 
 export type CartProviderProps = {
