@@ -1,10 +1,9 @@
 /* eslint-disable no-tabs */
-import React, { useState, useReducer } from 'react'
+import React, { useState, useReducer, useEffect } from 'react'
 import { CartContext } from './cart-context'
 
 // Types
 import { CartItemType, CartProviderProps, CartReducerState, CartRedcerAction } from '../../types/cart.types'
-import { log } from 'console'
 
 const defaultState: CartReducerState = {
 	cartItems: []
@@ -51,11 +50,17 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 
 	const [state, dispatch] = useReducer(cartReducer, defaultState)
 
-	document.addEventListener('keydown', (e: KeyboardEvent) => {
-		if (e.key === 'Escape') {
-			setisModalOpen(false)
+	useEffect(() => {
+		const keyDownHandler = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') {
+				setisModalOpen(false)
+			}
 		}
-	})
+		document.addEventListener('keydown', keyDownHandler)
+		return () => {
+			document.removeEventListener('keydown', keyDownHandler)
+		}
+	}, [])
 
 	const openModalHandler = () => {
 		setisModalOpen(true)
