@@ -8,19 +8,20 @@ import { Wrapper } from '../Helpers/Wrapper/Wrapper'
 // styles
 import styles from './CartItem.module.scss'
 
+// context
+import { CartItemType } from '../../context/Cart/cart-context.types'
+
 type CartItemProps = React.LiHTMLAttributes<HTMLLIElement> & {
-	item: {
-		id: number
-		name: string
-		price: number
-	}
+	item: CartItemType
 }
 
 export const CartItem = ({ item }: CartItemProps) => {
-	const priceEuro = `${item.price.toFixed(2)} €`
+	const price = item.price * item.quantity
+	const priceEuro = `${price.toFixed(2)} €`
 
 	return (
 		<li className={styles['cart-item']}>
+			<p className={styles['cart-item__quantity']}>{item.quantity}</p>
 			<p className={styles['cart-item__name']}>{item.name}</p>
 			<p className={styles['cart-item__price']}>{priceEuro}</p>
 
