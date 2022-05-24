@@ -45,14 +45,21 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 		dispatch({ type: 'CHANGE_QUANTITY', payload: { action, id } })
 	}
 
+	const getTotalCost = state.cartItems.reduce((acc, curr) => {
+		return acc + curr.price * curr.quantity
+	}, 0)
+
+	const getTotalItems = state.cartItems.reduce((acc, curr) => {
+		return acc + curr.quantity
+	}, 0)
+
 	return (
 		<CartContext.Provider
 			value={{
 				cartItems: state.cartItems,
-				totalOfItems: state.cartItems.reduce((acc, curr) => {
-					return acc + curr.quantity
-				}, 0),
+				totalOfItems: getTotalItems,
 				isModalOpen,
+				totalCost: getTotalCost,
 				openModal: openModalHandler,
 				closeModal: closeModalHandler,
 				addItem: addItemHandler,

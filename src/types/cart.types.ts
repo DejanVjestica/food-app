@@ -21,6 +21,7 @@ export type CartContextType = {
 	cartItems: MealItemExtendedType[]
 	totalOfItems: number
 	isModalOpen: boolean
+	totalCost: number
 	openModal: () => void
 	closeModal: () => void
 	addItem: (meal: MealItemExtendedType) => void
