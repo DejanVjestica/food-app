@@ -3,47 +3,10 @@ import React, { useState, useReducer, useEffect } from 'react'
 import { CartContext } from './cart-context'
 
 // Types
-import { CartItemType, CartProviderProps, CartReducerState, CartRedcerAction } from '../../types/cart.types'
+import { CartProviderProps, MealItemExtendedType } from '../../types/cart.types'
 
-const defaultState: CartReducerState = {
-	cartItems: []
-}
-
-const addItemToCart = (newItem: CartItemType, state: CartReducerState) => {
-	let newMeal
-	const existingMeal = state.cartItems.find((item) => item.id === newItem.id)
-
-	if (existingMeal) {
-		newMeal = state.cartItems.map((item) => {
-			if (item.id === newItem.id) {
-				return {
-					...item,
-					quantity: item.quantity + newItem.quantity
-				}
-			}
-			return item
-		})
-
-		return [...newMeal]
-	} else {
-		return [...state.cartItems, newItem]
-	}
-}
-
-const cartReducer = (state: CartReducerState, action: CartRedcerAction) => {
-	switch (action.type) {
-		case 'ADD_ITEM':
-			return {
-				cartItems: addItemToCart(action.payload, state)
-			}
-		case 'REMOVE_ITEM':
-			return {
-				cartItems: []
-			}
-		default:
-			return defaultState
-	}
-}
+// reducer
+import { cartReducer, defaultState } from './cart-reducer'
 
 export const CartProvider = ({ children }: CartProviderProps) => {
 	const [isModalOpen, setisModalOpen] = useState<boolean>(false)
@@ -70,17 +33,16 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 		setisModalOpen(false)
 	}
 
-	const addItemHandler = (meal: CartItemType) => {
+	const addItemHandler = (meal: MealItemExtendedType) => {
 		dispatch({ type: 'ADD_ITEM', payload: meal })
 	}
 
-	const removeItemHandler = (id: number) => {
-		dispatch({ type: 'REMOVE_ITEM', payload: id })
+	const clearCartHandler = () => {
+		dispatch({ type: 'CLEAR_CART' })
 	}
 
 	const changeQuantityHandler = (action: string, id: number) => {
-		// dispatch({ type: 'REMOVE_ITEM', payload: id })
-		console.log('changeQuantityHandler', action, id)
+		dispatch({ type: 'CHANGE_QUANTITY', payload: { action, id } })
 	}
 
 	return (
@@ -94,7 +56,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 				openModal: openModalHandler,
 				closeModal: closeModalHandler,
 				addItem: addItemHandler,
-				removeItem: removeItemHandler,
+				clearCart: clearCartHandler,
 				changeQuantity: changeQuantityHandler
 			}}>
 			{children}

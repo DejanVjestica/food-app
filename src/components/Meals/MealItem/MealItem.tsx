@@ -1,24 +1,14 @@
 import React from 'react'
 
-import styles from './MealItem.module.scss'
-
+// components
 import { Img } from '../../UI/Img/Img'
 import { MealItemForm } from './MealItemForm'
 
-type MealItemType = {
-	id: number
-	name: string
-	price: number
-	image: {
-		src: string
-		alt: string
-		srcSet: {
-			src: string
-			imageWidth: string
-		}[]
-	}
-	description: string
-}
+// styles
+import styles from './MealItem.module.scss'
+
+// types
+import { MealItemType } from '../../../types/cart.types'
 
 type MealItemProps = {
 	meal: MealItemType

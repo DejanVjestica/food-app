@@ -1,19 +1,20 @@
 import React, { useContext, useRef } from 'react'
 
-import styles from './MealItemForm.module.scss'
-
+// components
 import { Button } from '../../UI/Button/Button'
 import { Input } from '../../UI/Input/Input'
+
+// styles
+import styles from './MealItemForm.module.scss'
 
 // context
 import { CartContext } from '../../../context/Cart/cart-context'
 
+// types
+import { MealItemType, MealItemExtendedType } from '../../../types/cart.types'
+
 type MealItemFormProps = {
-	meal: {
-		id: number
-		name: string
-		price: number
-	}
+	meal: MealItemType
 }
 
 export const MealItemForm = ({ meal }: MealItemFormProps) => {
@@ -24,7 +25,7 @@ export const MealItemForm = ({ meal }: MealItemFormProps) => {
 		event.preventDefault()
 		const quantity = parseInt(quantityRef.current!.value as string, 10)
 
-		const newMeal = {
+		const newMeal: MealItemExtendedType = {
 			...meal,
 			quantity
 		}

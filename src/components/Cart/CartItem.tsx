@@ -12,10 +12,10 @@ import styles from './CartItem.module.scss'
 import { CartContext } from '../../context/Cart/cart-context'
 
 // types
-import { CartItemType } from '../../types/cart.types'
+import { MealItemExtendedType } from '../../types/cart.types'
 
 type CartItemProps = React.LiHTMLAttributes<HTMLLIElement> & {
-	item: CartItemType
+	item: MealItemExtendedType
 }
 
 export const CartItem = ({ item }: CartItemProps) => {
