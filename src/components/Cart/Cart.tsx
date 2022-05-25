@@ -20,11 +20,14 @@ export const Cart = () => {
 
 	return (
 		<Modal element={'#cart-modal-root'}>
+			{!hasItems && <p>Please fill up the Cart</p>}
 			<ul className={styles.cart__items}>{orderItems}</ul>
-			<p className={styles.cart__total}>
-				<span>Total amount</span>
-				<span>{`${totalPrice.toFixed(2)} €`}</span>
-			</p>
+			{hasItems && (
+				<p className={styles.cart__total}>
+					<span>Total amount</span>
+					<span>{`${totalPrice.toFixed(2)} €`}</span>
+				</p>
+			)}
 			<Wrapper as="div" className={styles.cart__actions}>
 				<Button onClick={closeModal} className={styles.button__close}>
 					Close
