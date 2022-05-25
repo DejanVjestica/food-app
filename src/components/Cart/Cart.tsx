@@ -13,7 +13,7 @@ import styles from './Cart.module.scss'
 import { CartContext } from '../../context/Cart/cart-context'
 
 export const Cart = () => {
-	const { closeModal, cartItems, totalPrice } = useContext(CartContext)
+	const { closeModal, cartItems, totalPrice, clearCart } = useContext(CartContext)
 
 	const orderItems = cartItems.map((item) => <CartItem key={item.id} item={item} />)
 	const hasItems = cartItems.length > 0
@@ -29,6 +29,7 @@ export const Cart = () => {
 				</p>
 			)}
 			<Wrapper as="div" className={styles.cart__actions}>
+				{hasItems && <Button onClick={clearCart}>Clear Cart</Button>}
 				<Button onClick={closeModal} className={styles.button__close}>
 					Close
 				</Button>

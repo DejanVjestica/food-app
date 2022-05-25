@@ -26,7 +26,7 @@ export type CartContextType = {
 	closeModal: () => void
 	addItem: (item: MealItemExtendedType) => void
 	removeItem: (item: MealItemExtendedType) => void
-	clearCart: (id: number) => void
+	clearCart: () => void
 }
 
 type CartAddAction = {
