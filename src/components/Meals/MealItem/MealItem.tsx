@@ -29,7 +29,7 @@ export const MealItem = (props: MealItemProps) => {
 					<strong>Price:</strong> {price}
 				</p>
 			</div>
-			<MealItemForm meal={props.meal}></MealItemForm>
+			<MealItemForm item={props.meal}></MealItemForm>
 		</li>
 	)
 }

@@ -6,12 +6,12 @@ import { CartContextType } from '../../types/cart.types'
 
 export const CartContext = createContext({
 	cartItems: [],
-	totalOfItems: 0,
-	totalCost: 0,
+	totalPrice: 0,
+	totalItems: 0,
 	isModalOpen: false,
 	openModal: () => {},
 	closeModal: () => {},
 	addItem: () => {},
-	clearCart: () => {},
-	changeQuantity: () => {}
+	removeItem: () => {},
+	clearCart: () => {}
 } as CartContextType)

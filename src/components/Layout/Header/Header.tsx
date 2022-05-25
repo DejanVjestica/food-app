@@ -12,7 +12,7 @@ import { Wrapper } from '../../Helpers/Wrapper/Wrapper'
 import { CartContext } from '../../../context/Cart/cart-context'
 
 export const Header = () => {
-	const { openModal, totalOfItems, totalCost } = useContext(CartContext)
+	const { openModal, totalPrice, totalItems } = useContext(CartContext)
 
 	return (
 		<>
@@ -23,8 +23,8 @@ export const Header = () => {
 						<FontAwesomeIcon icon={faCartShopping} />
 					</span>
 					<span>Your cart</span>
-					<span className={CartStyles.badge}>{totalOfItems}</span>
-					<span className={CartStyles.price}>{`${totalCost.toFixed(2)} €`}</span>
+					<span className={CartStyles.badge}>{totalItems}</span>
+					<span className={CartStyles.price}>{`${totalPrice.toFixed(2)} €`}</span>
 				</Button>
 			</Wrapper>
 		</>

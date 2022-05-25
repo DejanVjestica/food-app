@@ -3,23 +3,30 @@ import React, { useState, useReducer, useEffect } from 'react'
 import { CartContext } from './cart-context'
 
 // Types
-import { CartProviderProps, MealItemExtendedType } from '../../types/cart.types'
+import { MealItemExtendedType } from '../../types/cart.types'
 
 // reducer
 import { cartReducer, defaultState } from './cart-reducer'
+
+type CartProviderProps = {
+	children: React.ReactNode
+}
 
 export const CartProvider = ({ children }: CartProviderProps) => {
 	const [isModalOpen, setisModalOpen] = useState<boolean>(false)
 
 	const [state, dispatch] = useReducer(cartReducer, defaultState)
 
+	// listen on keydow events esc and close modal
 	useEffect(() => {
 		const keyDownHandler = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') {
+			if (e.key === 'Escape' && isModalOpen) {
 				setisModalOpen(false)
 			}
 		}
+
 		document.addEventListener('keydown', keyDownHandler)
+
 		return () => {
 			document.removeEventListener('keydown', keyDownHandler)
 		}
@@ -33,38 +40,30 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 		setisModalOpen(false)
 	}
 
-	const addItemHandler = (meal: MealItemExtendedType) => {
-		dispatch({ type: 'ADD_ITEM', payload: meal })
+	const addItemHandler = (item: MealItemExtendedType) => {
+		dispatch({ type: 'ADD_ITEM', payload: item })
+	}
+
+	const removeItemHandler = (item: MealItemExtendedType) => {
+		dispatch({ type: 'REMOVE_ITEM', payload: item })
 	}
 
 	const clearCartHandler = () => {
 		dispatch({ type: 'CLEAR_CART' })
 	}
 
-	const changeQuantityHandler = (action: string, id: number) => {
-		dispatch({ type: 'CHANGE_QUANTITY', payload: { action, id } })
-	}
-
-	const getTotalCost = state.cartItems.reduce((acc, curr) => {
-		return acc + curr.price * curr.quantity
-	}, 0)
-
-	const getTotalItems = state.cartItems.reduce((acc, curr) => {
-		return acc + curr.quantity
-	}, 0)
-
 	return (
 		<CartContext.Provider
 			value={{
 				cartItems: state.cartItems,
-				totalOfItems: getTotalItems,
 				isModalOpen,
-				totalCost: getTotalCost,
+				totalPrice: state.totalPrice,
+				totalItems: state.cartItems.reduce((acc, curr) => acc + curr.quantity, 0),
 				openModal: openModalHandler,
 				closeModal: closeModalHandler,
 				addItem: addItemHandler,
-				clearCart: clearCartHandler,
-				changeQuantity: changeQuantityHandler
+				removeItem: removeItemHandler,
+				clearCart: clearCartHandler
 			}}>
 			{children}
 		</CartContext.Provider>

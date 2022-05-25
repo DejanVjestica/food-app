@@ -1,65 +1,70 @@
 // types
-import { CartReducerState, CartReducerAction, CartChangeQuantityPayload, MealItemExtendedType } from '../../types/cart.types'
+import { CartReducerAction, MealItemExtendedType } from '../../types/cart.types'
 
-export const defaultState: CartReducerState = {
-	cartItems: []
+type CartReducerState = {
+	cartItems: MealItemExtendedType[]
+	totalPrice: number
 }
 
-const addItemToCart = (newItem: MealItemExtendedType, state: CartReducerState) => {
-	let newMeal
-	const existingMeal = state.cartItems.find((item) => item.id === newItem.id)
+export const defaultState: CartReducerState = {
+	cartItems: [],
+	totalPrice: 0
+}
 
-	if (existingMeal) {
-		newMeal = state.cartItems.map((item) => {
-			if (item.id === newItem.id) {
-				return {
-					...item,
-					quantity: item.quantity + newItem.quantity
-				}
-			}
-			return item
-		})
+const addItemToCartHandler = (newItem: MealItemExtendedType, state: CartReducerState) => {
+	const existingCartItemIndex = state.cartItems.findIndex((item) => item.id === newItem.id)
+	const existingCartItem = state.cartItems[existingCartItemIndex]
+	let updatedItems
 
-		return [...newMeal]
+	if (existingCartItem) {
+		const updatedItem = {
+			...existingCartItem,
+			quantity: existingCartItem.quantity + newItem.quantity
+		}
+
+		updatedItems = [...state.cartItems]
+		updatedItems[existingCartItemIndex] = updatedItem
+
+		return [...updatedItems]
 	} else {
 		return [...state.cartItems, newItem]
 	}
 }
 
-const changeQuantity = (newQuantity: CartChangeQuantityPayload, state: CartReducerState) => {
-	const newCartItems = state.cartItems.map((item) => {
-		if (item.id === newQuantity.id) {
-			if (newQuantity.action === 'ADD') {
-				return {
-					...item,
-					quantity: item.quantity + 1
-				}
-			} else if (newQuantity.action === 'REMOVE') {
-				return {
-					...item,
-					quantity: item.quantity - 1
-				}
-			}
-		}
-		return item
-	})
+const removeItemFromCartHandler = (itemToRemove: MealItemExtendedType, state: CartReducerState) => {
+	const existingCartItemIndex = state.cartItems.findIndex((item) => item.id === itemToRemove.id)
+	const existingCartItem = state.cartItems[existingCartItemIndex]
 
-	return [...newCartItems]
+	if (existingCartItem.quantity === 1) {
+		const updatedItems = state.cartItems.filter((item) => item.quantity > 1)
+		return [...updatedItems]
+	} else {
+		const updatedItem = {
+			...existingCartItem,
+			quantity: existingCartItem.quantity - itemToRemove.quantity
+		}
+		const updatedItems: MealItemExtendedType[] = [...state.cartItems]
+		updatedItems[existingCartItemIndex] = updatedItem
+		return [...updatedItems]
+	}
 }
 
 export const cartReducer = (state: CartReducerState, action: CartReducerAction) => {
 	switch (action.type) {
 		case 'ADD_ITEM':
 			return {
-				cartItems: addItemToCart(action.payload, state)
+				cartItems: addItemToCartHandler(action.payload, state),
+				totalPrice: state.totalPrice + action.payload.price * action.payload.quantity
+			}
+		case 'REMOVE_ITEM':
+			return {
+				cartItems: removeItemFromCartHandler(action.payload, state),
+				totalPrice: state.totalPrice - action.payload.price
 			}
 		case 'CLEAR_CART':
 			return {
-				cartItems: []
-			}
-		case 'CHANGE_QUANTITY':
-			return {
-				cartItems: changeQuantity(action.payload, state)
+				cartItems: [],
+				totalPrice: 0
 			}
 		default:
 			return defaultState

@@ -11,13 +11,13 @@ import styles from './MealItemForm.module.scss'
 import { CartContext } from '../../../context/Cart/cart-context'
 
 // types
-import { MealItemType, MealItemExtendedType } from '../../../types/cart.types'
+import { MealItemType } from '../../../types/cart.types'
 
 type MealItemFormProps = {
-	meal: MealItemType
+	item: MealItemType
 }
 
-export const MealItemForm = ({ meal }: MealItemFormProps) => {
+export const MealItemForm = ({ item }: MealItemFormProps) => {
 	const [isValid, setIsValid] = useState<boolean>(true)
 	const { addItem } = useContext(CartContext)
 	const quantityRef = useRef<HTMLInputElement>(null)
@@ -35,12 +35,12 @@ export const MealItemForm = ({ meal }: MealItemFormProps) => {
 			setIsValid(true)
 		}
 
-		const newMeal: MealItemExtendedType = {
-			...meal,
+		const newItem = {
+			...item,
 			quantity
 		}
 
-		addItem(newMeal)
+		addItem(newItem)
 	}
 
 	return (

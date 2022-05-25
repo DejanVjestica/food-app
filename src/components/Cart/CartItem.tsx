@@ -19,12 +19,19 @@ type CartItemProps = React.LiHTMLAttributes<HTMLLIElement> & {
 }
 
 export const CartItem = ({ item }: CartItemProps) => {
-	const { changeQuantity } = useContext(CartContext)
+	const { addItem, removeItem } = useContext(CartContext)
 	const price = item.price * item.quantity
 	const priceEuro = `${price.toFixed(2)} €`
 
-	const quantityChangeHandler = (e: React.MouseEvent<HTMLElement>): void => {
-		changeQuantity(e.currentTarget.getAttribute('value') as string, item.id)
+	const removeItemHandler = (): void => {
+		const newItem = { ...item, quantity: 1 }
+
+		removeItem(newItem)
+	}
+	const addItemHandler = (): void => {
+		const newItem = { ...item, quantity: 1 }
+
+		addItem(newItem)
 	}
 	return (
 		<li className={styles['cart-item']}>
@@ -34,10 +41,10 @@ export const CartItem = ({ item }: CartItemProps) => {
 
 			<Wrapper as="div" className={styles['cart-item__actions']}>
 				<Button className={styles['cart-item__remove']}>Add note</Button>
-				<Button value="REMOVE" className={styles['cart-item__remove-one']} onClick={quantityChangeHandler}>
+				<Button className={styles['cart-item__remove-one']} onClick={removeItemHandler}>
 					<FontAwesomeIcon icon={faMinus} />
 				</Button>
-				<Button value="ADD" className={styles['cart-item__add-one']} onClick={quantityChangeHandler}>
+				<Button className={styles['cart-item__add-one']} onClick={addItemHandler}>
 					<FontAwesomeIcon icon={faPlus} />
 				</Button>
 			</Wrapper>

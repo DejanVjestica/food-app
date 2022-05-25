@@ -19,41 +19,27 @@ export interface MealItemExtendedType extends MealItemType {
 
 export type CartContextType = {
 	cartItems: MealItemExtendedType[]
-	totalOfItems: number
 	isModalOpen: boolean
-	totalCost: number
+	totalPrice: number
+	totalItems: number
 	openModal: () => void
 	closeModal: () => void
-	addItem: (meal: MealItemExtendedType) => void
+	addItem: (item: MealItemExtendedType) => void
+	removeItem: (item: MealItemExtendedType) => void
 	clearCart: (id: number) => void
-	changeQuantity: (action: string, id: number) => void
-}
-
-export type CartProviderProps = {
-	children: React.ReactNode
-}
-
-export type CartReducerState = {
-	cartItems: MealItemExtendedType[]
 }
 
 type CartAddAction = {
 	type: 'ADD_ITEM'
 	payload: MealItemExtendedType
 }
-
 type CartRemoveAction = {
+	type: 'REMOVE_ITEM'
+	payload: MealItemExtendedType
+}
+
+type CartClearAction = {
 	type: 'CLEAR_CART'
 }
 
-export type CartChangeQuantityPayload = {
-	action: string
-	id: number
-}
-
-type CartChangeQuantityAction = {
-	type: 'CHANGE_QUANTITY'
-	payload: CartChangeQuantityPayload
-}
-
-export type CartReducerAction = CartAddAction | CartRemoveAction | CartChangeQuantityAction
+export type CartReducerAction = CartAddAction | CartClearAction | CartRemoveAction
