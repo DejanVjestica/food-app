@@ -16,6 +16,7 @@ export const Cart = () => {
 	const { closeModal, cartItems, totalCost } = useContext(CartContext)
 
 	const orderItems = cartItems.map((item) => <CartItem key={item.id} item={item} />)
+	const hasItems = cartItems.length > 0
 
 	return (
 		<Modal element={'#cart-modal-root'}>
@@ -28,7 +29,7 @@ export const Cart = () => {
 				<Button onClick={closeModal} className={styles.button__close}>
 					Close
 				</Button>
-				<Button className={styles.button__order}>Order</Button>
+				{hasItems && <Button className={styles.button__order}>Order</Button>}
 			</Wrapper>
 		</Modal>
 	)
