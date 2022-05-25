@@ -1,22 +1,15 @@
 /* eslint-disable react/display-name */
-import React, { useRef, useImperativeHandle, forwardRef, useState } from 'react'
+import React, { forwardRef, useState } from 'react'
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 	label?: string
 	id?: string
-} & React.RefAttributes<HTMLInputElement>
+}
 
-export const Input = forwardRef((props: InputProps, ref) => {
-	const inputRef = useRef<HTMLInputElement>(null)
+export const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) => {
 	const { label, ...newProps } = props
 
 	const [value, setValue] = useState('1')
-
-	useImperativeHandle(ref, () => {
-		return {
-			value
-		}
-	})
 
 	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(event.target.value)
@@ -25,7 +18,7 @@ export const Input = forwardRef((props: InputProps, ref) => {
 	return (
 		<>
 			<label htmlFor={newProps.id}>{label}</label>
-			<input ref={inputRef} {...newProps} value={value} onChange={onChangeHandler} />
+			<input ref={ref} {...newProps} value={value} onChange={onChangeHandler} />
 		</>
 	)
 })

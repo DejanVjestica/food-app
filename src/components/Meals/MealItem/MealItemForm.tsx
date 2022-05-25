@@ -19,11 +19,12 @@ type MealItemFormProps = {
 
 export const MealItemForm = ({ meal }: MealItemFormProps) => {
 	const { addItem } = useContext(CartContext)
-	const quantityRef = useRef<HTMLInputElement>()
+	const quantityRef = useRef<HTMLInputElement>(null)
 
 	const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
-		const quantity = parseInt(quantityRef.current!.value as string, 10)
+
+		const quantity = +quantityRef.current!.value
 
 		const newMeal: MealItemExtendedType = {
 			...meal,
