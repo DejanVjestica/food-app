@@ -47,7 +47,7 @@ export type AddNoteType = {
 	id: number
 }
 
-type CartNoteAction = {
+type CartNoteAddAction = {
 	type: 'ADD_NOTE'
 	payload: AddNoteType
 }
@@ -61,4 +61,4 @@ type CartClearAction = {
 	type: 'CLEAR_CART'
 }
 
-export type CartReducerAction = CartAddAction | CartClearAction | CartRemoveAction | CartNoteAction | CartNoteRemoveAction
+export type CartReducerAction = CartAddAction | CartClearAction | CartRemoveAction | CartNoteAddAction | CartNoteRemoveAction
