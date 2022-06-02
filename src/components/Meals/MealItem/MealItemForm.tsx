@@ -19,6 +19,7 @@ type MealItemFormProps = {
 
 export const MealItemForm = ({ item }: MealItemFormProps) => {
 	const [isValid, setIsValid] = useState<boolean>(true)
+	const [inputValue, setInputValue] = useState<string>('1')
 	const { addItem } = useContext(CartContext)
 	const quantityRef = useRef<HTMLInputElement>(null)
 
@@ -43,9 +44,23 @@ export const MealItemForm = ({ item }: MealItemFormProps) => {
 		addItem(newItem)
 	}
 
+	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setInputValue(event.target.value)
+	}
+
 	return (
 		<form className={styles.form} onSubmit={submitHandler}>
-			<Input ref={quantityRef} type="number" min="1" max="5" step="1" value="1" label="Amount" id="cart" />
+			<Input
+				ref={quantityRef}
+				type="number"
+				min="1"
+				max="5"
+				step="1"
+				defaultValue={inputValue}
+				label="Amount"
+				id="cart"
+				onChange={onChangeHandler}
+			/>
 			{!isValid && <p className={styles.error}>Please enter a valid amount</p>}
 			<Button type="submit">+ Add to cart</Button>
 		</form>
