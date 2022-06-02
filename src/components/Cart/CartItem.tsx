@@ -1,10 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 
 // components
 import { Button } from '../UI/Button/Button'
 import { Wrapper } from '../Helpers/Wrapper/Wrapper'
+import { CartNote } from './CartNote'
+
 // styles
 import styles from './CartItem.module.scss'
 
@@ -22,17 +24,27 @@ export const CartItem = ({ item }: CartItemProps) => {
 	const { addItem, removeItem } = useContext(CartContext)
 	const price = item.price * item.quantity
 	const priceEuro = `${price.toFixed(2)} €`
+	const [showText, setShowText] = useState(false)
+	const newItem = { ...item, quantity: 1 }
 
-	const removeItemHandler = (): void => {
-		const newItem = { ...item, quantity: 1 }
-
-		removeItem(newItem)
-	}
 	const addItemHandler = (): void => {
-		const newItem = { ...item, quantity: 1 }
-
 		addItem(newItem)
 	}
+
+	const removeItemHandler = (): void => {
+		removeItem(newItem)
+	}
+
+	const cancelNoteHandler = (): void => {
+		setShowText(false)
+	}
+
+	const showNoteHandler = (): void => {
+		setShowText(true)
+	}
+
+	const addNoteLabel = item.note ? 'Edit note' : 'Add note'
+
 	return (
 		<li className={styles['cart-item']}>
 			<p className={styles['cart-item__quantity']}>{item.quantity}</p>
@@ -40,13 +52,18 @@ export const CartItem = ({ item }: CartItemProps) => {
 			<p className={styles['cart-item__price']}>{priceEuro}</p>
 
 			<Wrapper as="div" className={styles['cart-item__actions']}>
-				<Button className={styles['cart-item__remove']}>Add note</Button>
+				<Button className={styles['cart-item__remove']} onClick={showNoteHandler}>
+					{addNoteLabel}
+				</Button>
+
 				<Button className={styles['cart-item__remove-one']} onClick={removeItemHandler}>
 					<FontAwesomeIcon icon={faMinus} />
 				</Button>
 				<Button className={styles['cart-item__add-one']} onClick={addItemHandler}>
 					<FontAwesomeIcon icon={faPlus} />
 				</Button>
+				{!showText && <p className={styles['cart-item__note']}>{item.note}</p>}
+				{showText && <CartNote note={item.note} cancelNote={cancelNoteHandler} id={item.id}></CartNote>}
 			</Wrapper>
 		</li>
 	)

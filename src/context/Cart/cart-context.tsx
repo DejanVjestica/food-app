@@ -13,5 +13,7 @@ export const CartContext = createContext({
 	closeModal: () => {},
 	addItem: () => {},
 	removeItem: () => {},
-	clearCart: () => {}
+	clearCart: () => {},
+	addNote: () => {},
+	removeNote: () => {}
 } as CartContextType)

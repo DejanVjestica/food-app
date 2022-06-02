@@ -12,6 +12,12 @@
 	margin-right: 1rem;
 }
 
+.cart-item__note {
+	flex: 100%;
+	font-size: 0.8rem;
+	color: #4d4d4d;
+}
+
 .cart-item__name,
 .cart-item__price {
 	flex: 1;
@@ -31,6 +37,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+	flex-wrap: wrap;
 
 	> button {
 		font: inherit;

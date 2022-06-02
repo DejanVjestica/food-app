@@ -1,5 +1,5 @@
 // types
-import { CartReducerAction, MealItemExtendedType } from '../../types/cart.types'
+import { CartReducerAction, MealItemExtendedType, AddNoteType } from '../../types/cart.types'
 
 type CartReducerState = {
 	cartItems: MealItemExtendedType[]
@@ -49,6 +49,24 @@ const removeItemFromCartHandler = (itemToRemove: MealItemExtendedType, state: Ca
 	}
 }
 
+const addNoteHandler = (note: AddNoteType, state: CartReducerState) => {
+	const existingItemIndex = state.cartItems.findIndex((item) => item.id === note.id)
+	const existingItem = state.cartItems[existingItemIndex]
+	existingItem.note = note.note
+	const updatedItems: MealItemExtendedType[] = [...state.cartItems]
+
+	return [...updatedItems]
+}
+
+const removeNoteHandler = (id: number, state: CartReducerState) => {
+	const existingItemIndex = state.cartItems.findIndex((item) => item.id === id)
+	const existingItem = state.cartItems[existingItemIndex]
+	delete existingItem.note
+	const updatedItems: MealItemExtendedType[] = [...state.cartItems]
+
+	return [...updatedItems]
+}
+
 export const cartReducer = (state: CartReducerState, action: CartReducerAction) => {
 	switch (action.type) {
 		case 'ADD_ITEM':
@@ -65,6 +83,16 @@ export const cartReducer = (state: CartReducerState, action: CartReducerAction) 
 			return {
 				cartItems: [],
 				totalPrice: 0
+			}
+		case 'ADD_NOTE':
+			return {
+				cartItems: addNoteHandler(action.payload, state),
+				totalPrice: state.totalPrice
+			}
+		case 'REMOVE_NOTE':
+			return {
+				cartItems: removeNoteHandler(action.payload, state),
+				totalPrice: state.totalPrice
 			}
 		default:
 			return defaultState

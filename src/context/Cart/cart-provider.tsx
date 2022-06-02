@@ -52,6 +52,14 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 		dispatch({ type: 'CLEAR_CART' })
 	}
 
+	const addNoteHandler = (note: string, id: number) => {
+		dispatch({ type: 'ADD_NOTE', payload: { note, id } })
+	}
+
+	const removeNoteHandler = (id: number) => {
+		dispatch({ type: 'REMOVE_NOTE', payload: id })
+	}
+
 	return (
 		<CartContext.Provider
 			value={{
@@ -63,7 +71,9 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 				closeModal: closeModalHandler,
 				addItem: addItemHandler,
 				removeItem: removeItemHandler,
-				clearCart: clearCartHandler
+				clearCart: clearCartHandler,
+				addNote: addNoteHandler,
+				removeNote: removeNoteHandler
 			}}>
 			{children}
 		</CartContext.Provider>

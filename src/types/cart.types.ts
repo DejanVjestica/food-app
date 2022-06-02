@@ -15,6 +15,7 @@ export interface MealItemType {
 
 export interface MealItemExtendedType extends MealItemType {
 	quantity: number
+	note?: string
 }
 
 export type CartContextType = {
@@ -27,19 +28,37 @@ export type CartContextType = {
 	addItem: (item: MealItemExtendedType) => void
 	removeItem: (item: MealItemExtendedType) => void
 	clearCart: () => void
+	addNote: (note: string, id: number) => void
+	removeNote: (id: number) => void
 }
 
 type CartAddAction = {
 	type: 'ADD_ITEM'
 	payload: MealItemExtendedType
 }
+
 type CartRemoveAction = {
 	type: 'REMOVE_ITEM'
 	payload: MealItemExtendedType
+}
+
+export type AddNoteType = {
+	note: string
+	id: number
+}
+
+type CartNoteAction = {
+	type: 'ADD_NOTE'
+	payload: AddNoteType
+}
+
+type CartNoteRemoveAction = {
+	type: 'REMOVE_NOTE'
+	payload: number
 }
 
 type CartClearAction = {
 	type: 'CLEAR_CART'
 }
 
-export type CartReducerAction = CartAddAction | CartClearAction | CartRemoveAction
+export type CartReducerAction = CartAddAction | CartClearAction | CartRemoveAction | CartNoteAction | CartNoteRemoveAction
