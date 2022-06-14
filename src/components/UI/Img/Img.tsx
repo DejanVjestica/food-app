@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { SrcSetContext } from '../../../context/srcSet-context'
+import { SrcSetContext } from '../../../context/srcSet-context.tsx/srcSet-context'
 
 type SrcSet = {
 	src: string

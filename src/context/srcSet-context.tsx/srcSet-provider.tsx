@@ -1,17 +1,8 @@
-import React, { createContext } from 'react'
+import React from 'react'
 
-type SrcSetItem = {
-	src: string
-	imageWidth: string
-}
+import { SrcSetItem } from '../../types/srcSet.types'
 
-type SrcSetContextType = {
-	generateSrcSet: (srcArr: SrcSetItem[]) => string
-}
-
-export const SrcSetContext = createContext<SrcSetContextType>({
-	generateSrcSet: () => ''
-})
+import { SrcSetContext } from './srcSet-context'
 
 type SrcSetProviderProps = {
 	children: React.ReactNode

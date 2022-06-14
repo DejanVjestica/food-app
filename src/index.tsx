@@ -4,7 +4,7 @@ import './index.scss'
 import { App } from './App'
 import reportWebVitals from './reportWebVitals'
 // contexts
-import { SrcSetProvider } from './context/srcSet-context'
+import { SrcSetProvider } from './context/srcSet-context.tsx/srcSet-provider'
 import { CartProvider } from './context/Cart/cart-provider'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
