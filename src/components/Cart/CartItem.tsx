@@ -52,16 +52,17 @@ export const CartItem = ({ item }: CartItemProps) => {
 			<p className={styles['cart-item__price']}>{priceEuro}</p>
 
 			<Wrapper as="div" className={styles['cart-item__actions']}>
-				<Button className={styles['cart-item__remove']} onClick={showNoteHandler}>
+				{!showText && <Button variant='simple' onClick={showNoteHandler}>
 					{addNoteLabel}
-				</Button>
-
-				<Button className={styles['cart-item__remove-one']} onClick={removeItemHandler}>
-					<FontAwesomeIcon icon={faMinus} />
-				</Button>
-				<Button className={styles['cart-item__add-one']} onClick={addItemHandler}>
-					<FontAwesomeIcon icon={faPlus} />
-				</Button>
+				</Button>}
+				<Wrapper as="div" className={styles['cart-item__actions-add-remove']}>
+					<Button variant='icon' onClick={removeItemHandler}>
+						<FontAwesomeIcon icon={faMinus} />
+					</Button>
+					<Button variant='icon' onClick={addItemHandler}>
+						<FontAwesomeIcon icon={faPlus} />
+					</Button>
+				</Wrapper>
 				{!showText && <p className={styles['cart-item__note']}>{item.note}</p>}
 				{showText && <CartNote note={item.note} cancelNote={cancelNoteHandler} id={item.id}></CartNote>}
 			</Wrapper>

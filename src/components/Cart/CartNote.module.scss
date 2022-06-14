@@ -7,20 +7,6 @@
 	transition: all 0.3s ease-in-out;
 }
 
-.note_action {
-	> button {
-		background-color: transparent;
-		border: none;
-		cursor: pointer;
-		text-decoration: none;
-		transition: text-decoration 0.6s ease-in-out;
-
-		&:hover {
-			text-decoration: underline;
-		}
-	}
-}
-
 .note_text {
 	border-bottom: 1px solid rgb(63, 63, 63);
 	flex-wrap: wrap;

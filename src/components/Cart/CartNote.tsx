@@ -35,16 +35,16 @@ export const CartNote = ({ cancelNote, id, note }: CartNoteProps) => {
 	return (
 		<Wrapper as="div" className={styles.note_action}>
 			<textarea className={styles.note_text} ref={noteRef} rows={5} cols={33} defaultValue={note}></textarea>
-			<Button className={styles.note_add} onClick={addNoteHandler}>
+			<Button variant='simple' onClick={addNoteHandler}>
 				{buttonAddNoteLabel}
 			</Button>
 			{!note && (
-				<Button className={styles.note_remove} onClick={cancelNote}>
+				<Button variant='simple' onClick={cancelNote}>
 					Cancel
 				</Button>
 			)}
 			{note && (
-				<Button className={styles.note_remove} onClick={removeNoteHandler}>
+				<Button variant='simple' onClick={removeNoteHandler}>
 					Delete
 				</Button>
 			)}

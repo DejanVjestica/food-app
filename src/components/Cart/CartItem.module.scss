@@ -40,34 +40,17 @@
 	flex-wrap: wrap;
 
 	> button {
-		font: inherit;
-		cursor: pointer;
-		color: #002ed6;
-		background-color: transparent;
-		border: 1px solid rgb(63, 63, 63);
-		margin-left: 1rem;
-		transition: all 0.3s ease-in-out;
-	}
-
-	> button:hover,
-	> button:active {
-		border-color: #002ed6;
+		margin: 0 auto 0 0;
+		
 	}
 }
 
-.cart-item__actions .cart-item__remove {
-	margin: 0 auto 0 0;
-	border: none;
-	padding: 0;
-	text-decoration: underline;
-}
+.cart-item__actions-add-remove {
+	button {
+		margin-right: 1rem;
 
-// .cart-item__remove-one {
-// 	color: #8a2b06;
-// 	transition: all 0.3s ease-in-out;
-// }
-
-.cart-item__add-one {
-	color: #8a2b06;
-	transition: all 0.3s ease-in-out;
+		&:last-of-type {
+			margin-right: 0;
+		}
+	}
 }

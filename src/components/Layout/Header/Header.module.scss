@@ -10,6 +10,17 @@
 	right: 0;
 	z-index: 10;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+
+	button {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+	}
+
+	button:hover .badge,
+	button:active .badge {
+		background-color: #92320c;
+	}
 }
 
 .headline {
@@ -18,3 +29,47 @@
 	margin: 0;
 	margin-bottom: 0.4rem;
 }
+
+.icon {
+	width: 1.35rem;
+	height: 1.35rem;
+	margin-right: 0.5rem;
+}
+
+.badge {
+	background-color: #b94517;
+	padding: 0.25rem 1rem;
+	border-radius: 25px;
+	margin-left: 1rem;
+	font-weight: bold;
+}
+
+.price {
+	font-size: 1rem;
+	margin-left: 1rem;
+}
+
+.bump {
+	button {
+		animation: bump 300ms ease-out;
+	}
+}
+
+@keyframes bump {
+	0% {
+		transform: scale(1);
+	}
+	10% {
+		transform: scale(0.9);
+	}
+	30% {
+		transform: scale(1.1);
+	}
+	50% {
+		transform: scale(1.15);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+

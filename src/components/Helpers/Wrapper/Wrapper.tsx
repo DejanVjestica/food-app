@@ -3,6 +3,7 @@ import React from 'react'
 type WrapperOwnProps<E extends React.ElementType> = {
 	children: React.ReactNode
 	as?: E
+	className?: string[] | string
 }
 
 type WrapperProps<E extends React.ElementType> = WrapperOwnProps<E> &

@@ -23,8 +23,8 @@ export type CartContextType = {
 	isModalOpen: boolean
 	totalPrice: number
 	totalItems: number
-	openModal: () => void
-	closeModal: () => void
+	openCartModal: () => void
+	closeCartModal: () => void
 	addItem: (item: MealItemExtendedType) => void
 	removeItem: (item: MealItemExtendedType) => void
 	clearCart: () => void

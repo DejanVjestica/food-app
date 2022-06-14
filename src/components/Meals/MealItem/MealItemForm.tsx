@@ -62,7 +62,7 @@ export const MealItemForm = ({ item }: MealItemFormProps) => {
 				onChange={onChangeHandler}
 			/>
 			{!isValid && <p className={styles.error}>Please enter a valid amount</p>}
-			<Button type="submit">+ Add to cart</Button>
+			<Button type="submit" variant='primary'>+ Add to cart</Button>
 		</form>
 	)
 }
