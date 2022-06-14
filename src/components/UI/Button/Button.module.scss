@@ -1,0 +1,55 @@
+.default {
+	cursor: pointer;
+	font: inherit;
+	
+	transition: all 0.3s ease-in-out;
+	border: none;
+}
+
+// Primary button
+.primary {
+	background-color: #8a2b06;
+	border: 1px solid #8a2b06;
+	color: white;
+	font-weight: bold;
+	padding: 0.25rem 2rem;
+}
+
+.primary:hover,
+.primary:active {
+	background-color: #641e03;
+	border-color: #641e03;
+}
+
+// Secondary button
+.secondary {
+	background-color: transparent;
+	border: 1px solid #8a2b06;
+	padding: 0.25rem 2rem;
+}
+
+.secondary:hover,
+.secondary:active {
+	background-color: #5a1a01;
+	border-color: #5a1a01;
+	color: white;
+}
+
+// Button with only icon
+.icon {
+	background-color: transparent;
+	border: 1px solid rgb(63, 63, 63);
+	
+	&:hover,
+	&:active {
+		border-color: #002ed6;
+	}
+}
+
+// Button only a word 
+.simple {
+	color: #002ed6;
+	font-size: small;
+	background-color: transparent;
+	text-decoration: underline;
+}
