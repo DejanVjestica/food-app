@@ -10,6 +10,9 @@ import styles from './MealItemForm.module.scss'
 // context
 import { CartContext } from '../../../context/Cart/cart-context'
 
+// hooks
+import { useInput, UseInputConfigType } from '../../../hooks/use-input'
+
 // types
 import { MealItemType } from '../../../types/cart.types'
 
@@ -18,20 +21,30 @@ type MealItemFormProps = {
 }
 
 export const MealItemForm = ({ item }: MealItemFormProps) => {
-	// States
-	const [inputValue, setInputValue] = useState<string>('1')
 	// Context
 	const { addItem } = useContext(CartContext)
 
-	// check if the input is valid
-	const enteredAmountIsValid = inputValue.trim() !== '' && parseInt(inputValue) > 0
+	const quantityValidationHandler = (value: string) => value.trim() !== '' && parseInt(value) < 1
+
+	const quantityConfig: UseInputConfigType = {
+		defaultValue: '1',
+		checkTouch: false,
+		validationHandler: quantityValidationHandler
+	}
+
+	const {
+		value: quantityValue,
+		hasError: quantityError,
+		onChangeHandler: onQuantityChangeHandler,
+		resetState: resetQuantityState
+	} = useInput(quantityConfig)
 
 	const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 
-		if (!enteredAmountIsValid) return
+		if (!quantityError) return
 
-		const addedQuantity = inputValue
+		const addedQuantity = quantityValue
 		const quantity = +addedQuantity
 
 		const newItem = {
@@ -40,25 +53,22 @@ export const MealItemForm = ({ item }: MealItemFormProps) => {
 		}
 
 		addItem(newItem)
+		resetQuantityState()
 	}
 
-	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setInputValue(event.target.value)
-	}
-
-	const disableSubmitButton = !enteredAmountIsValid ? styles.disabled : ''
+	const disableSubmitButton = !quantityError ? styles.disabled : ''
 
 	return (
 		<form className={[styles.form, disableSubmitButton].join(' ')} onSubmit={submitHandler}>
 			<Input
 				type="number"
 				step="1"
-				defaultValue={inputValue}
+				value={quantityValue}
 				label="Amount"
 				id="cart"
-				onChange={onChangeHandler}
+				onChange={onQuantityChangeHandler}
 			/>
-			{!enteredAmountIsValid && <p className={styles.error}>Please enter a valid amount</p>}
+			{!quantityError && <p className={styles.error}>Please enter a valid amount</p>}
 			<Button type="submit" variant='primary'>+ Add to cart</Button>
 		</form>
 	)
