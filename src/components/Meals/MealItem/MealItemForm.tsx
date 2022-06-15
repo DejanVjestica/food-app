@@ -11,10 +11,11 @@ import styles from './MealItemForm.module.scss'
 import { CartContext } from '../../../context/Cart/cart-context'
 
 // hooks
-import { useInput, UseInputConfigType } from '../../../hooks/use-input'
+import { useInput } from '../../../hooks/use-input'
 
 // types
 import { MealItemType } from '../../../types/cart.types'
+import { UseInputConfigType } from '../../../hooks/use-input.types'
 
 type MealItemFormProps = {
 	item: MealItemType

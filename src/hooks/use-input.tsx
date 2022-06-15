@@ -1,54 +1,62 @@
-import React, { useState } from 'react'
+import React, { useReducer } from 'react'
 
-export type UseInputConfigType = {
-	defaultValue?: string
-	checkTouch?: boolean
-	validationHandler: (value: string) => boolean
+// Types
+import { UseInputConfigType, UseInputReturnType, UseInputReducerAction, UseInputStateType } from './use-input.types'
+
+const initialState = {
+	value: '',
+	isTouched: false
 }
 
-type useInputReturnType = {
-	value: string,
-	hasError:boolean,
-	resetState: () => void,
-	onChangeHandler:(event: React.ChangeEvent<HTMLInputElement>) => void,
-	onBlurHandler:(event: React.FocusEvent<HTMLInputElement>) => void
+const useInputReducer = (prewState: UseInputStateType, action: UseInputReducerAction) => {
+	switch (action.type) {
+		case 'CHANGE':
+			return {
+				value: action.value,
+				isTouched: true
+			}
+		case 'BLUR':
+			return {
+				value: prewState.value,
+				isTouched: true
+			}
+		case 'RESET':
+			return initialState
+		default:
+			return initialState
+	}
 }
 
 export const useInput = ({ defaultValue = '', checkTouch, validationHandler }: UseInputConfigType) => {
-	// States
-	const [enteredValue, setEnteredValue] = useState<string>(defaultValue || '')
-	const [isTouched, setIsTouched] = useState<boolean>(false)
+	// Reducer
+	const [state, action] = useReducer(useInputReducer, { value: defaultValue, isTouched: false })
 
-	const valueIsValid = validationHandler(enteredValue)
+	const valueIsValid = validationHandler(state.value)
 
 	let hasError
 	if (checkTouch) {
-		hasError = !valueIsValid && isTouched
+		hasError = !valueIsValid && state.isTouched
 	} else {
 		hasError = !valueIsValid
 	}
 
 	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setEnteredValue(event.target.value)
+		action({ type: 'CHANGE', value: event.target.value })
 	}
 
 	const onBlurHandler = () => {
-		if (!checkTouch) return
-		setIsTouched(true)
+		action({ type: 'BLUR' })
 	}
 
 	const resetState = () => {
-		setEnteredValue(defaultValue)
-		console.log('resetState', enteredValue)
-		if (!checkTouch) return
-		setIsTouched(false)
+		action({ type: 'RESET' })
 	}
 
 	return {
-		value: enteredValue,
+		value: state.value,
 		hasError,
 		onChangeHandler,
 		onBlurHandler,
 		resetState
-	} as useInputReturnType
+	} as UseInputReturnType
 }
