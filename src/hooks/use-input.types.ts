@@ -27,7 +27,8 @@ type UseInputBlurAction = {
 }
 
 type UseInputResetAction = {
-	type: 'RESET'
+	type: 'RESET',
+	value: string
 }
 
 export type UseInputReducerAction = UseInputChangeAction | UseInputBlurAction | UseInputResetAction

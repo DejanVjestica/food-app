@@ -21,7 +21,10 @@ const useInputReducer = (prewState: UseInputStateType, action: UseInputReducerAc
 				isTouched: true
 			}
 		case 'RESET':
-			return initialState
+			return {
+				value: action.value,
+				isTouched: false
+			}
 		default:
 			return initialState
 	}
@@ -49,7 +52,7 @@ export const useInput = ({ defaultValue = '', checkTouch, validationHandler }: U
 	}
 
 	const resetState = () => {
-		action({ type: 'RESET' })
+		action({ type: 'RESET', value: defaultValue })
 	}
 
 	return {
