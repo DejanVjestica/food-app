@@ -8,6 +8,7 @@ import headerStyles from './Header.module.scss'
 // components
 import { Button } from '../../UI/Button/Button'
 import { Wrapper } from '../../Helpers/Wrapper/Wrapper'
+import { Navigation } from '../../Layout/Navigation/Navigation'
 
 // contexts
 import { CartContext } from '../../../context/Cart/cart-context'
@@ -39,6 +40,7 @@ export const Header = () => {
 		<>
 			<Wrapper as="header" className={[headerStyles.header, buttonClasses].join(' ')}>
 				<h1 className={headerStyles.headline}>Food app</h1>
+
 				<Button onClick={openCartModal} variant='primary'>
 					<span className={headerStyles.icon}>
 						<FontAwesomeIcon icon={faCartShopping} />
@@ -47,6 +49,7 @@ export const Header = () => {
 					<span className={headerStyles.badge}>{totalItems}</span>
 					<span className={headerStyles.price}>{`${totalPrice.toFixed(2)} €`}</span>
 				</Button>
+				<Navigation variant='header' />
 			</Wrapper>
 		</>
 	)
