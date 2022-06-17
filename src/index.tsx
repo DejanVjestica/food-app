@@ -6,13 +6,21 @@ import reportWebVitals from './reportWebVitals'
 // contexts
 import { SrcSetProvider } from './context/srcSet-context.tsx/srcSet-provider'
 import { CartProvider } from './context/Cart/cart-provider'
+import { UserProvider } from './context/User/user-provider'
+// cookies
+import { CookiesProvider } from 'react-cookie'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+
 root.render(
 	<React.StrictMode>
 		<CartProvider>
 			<SrcSetProvider>
-				<App />
+				<CookiesProvider>
+					<UserProvider>
+						<App />
+					</UserProvider>
+				</CookiesProvider>
 			</SrcSetProvider>
 		</CartProvider>
 	</React.StrictMode>
