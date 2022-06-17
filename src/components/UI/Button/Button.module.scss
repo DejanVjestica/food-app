@@ -63,4 +63,8 @@ Variant: Button only a wordn
 	font-size: small;
 	background-color: transparent;
 	text-decoration: underline;
+
+	&.is-color-white{
+		color: white;
+	}
 }
