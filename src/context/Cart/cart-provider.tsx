@@ -30,7 +30,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 		return () => {
 			document.removeEventListener('keydown', keyDownHandler)
 		}
-	}, [])
+	}, [isModalOpen])
 
 	const openModalHandler = () => {
 		setisModalOpen(true)
