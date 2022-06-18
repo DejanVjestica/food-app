@@ -15,7 +15,7 @@ type NavigationProps = {
 }
 
 export const Navigation = ({ variant }: NavigationProps) => {
-	const { openUserModal } = useContext(UserContext)
+	const { openModal } = useContext(UserContext)
 
 	const NavItems = [
 		{
@@ -28,7 +28,7 @@ export const Navigation = ({ variant }: NavigationProps) => {
 		{
 			id: 3,
 			text: 'Login',
-			onClickHandler: openUserModal
+			onClickHandler: openModal
 		}
 	]
 	const items = NavItems.map(({ id, text, onClickHandler }) => (
