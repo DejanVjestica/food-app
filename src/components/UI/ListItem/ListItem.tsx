@@ -1,17 +1,11 @@
 import React from 'react'
 
 type ListItemProps = React.LiHTMLAttributes<HTMLLIElement> & {
-	link: {
-		href: string,
-		title: string
-	},
-	text: string
+	children: React.ReactNode
 }
 
-export const ListItem = ({ link, text }: ListItemProps) => {
+export const ListItem = ({ children }: ListItemProps) => {
 	return <li>
-		<a href={link.href} title={link.title}>
-			<span>{text}</span>
-		</a>
+		{children}
 	</li>
 }
