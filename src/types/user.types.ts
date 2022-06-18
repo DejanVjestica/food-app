@@ -1,5 +1,11 @@
 export type UserContextType = {
 	isModalOpen: boolean,
-	closeUserModal: () => void,
-	openUserModal: () => void
+	isLoginOpen: boolean,
+	isRegisterOpen: boolean,
+	openModal: ()=> void,
+	closeModal: ()=> void,
+	openLogin: () => void,
+	closeLogin: () => void,
+	openRegister: () => void,
+	closeRegister: () => void
 }

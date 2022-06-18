@@ -5,6 +5,11 @@ import { UserContextType } from '../../types/user.types'
 
 export const UserContext = createContext({
 	isModalOpen: false,
-	openUserModal: () => undefined,
-	closeUserModal: () => undefined
+	isLoginOpen: false,
+	isRegisterOpen: false,
+	openModal: () => undefined,
+	openLogin: () => undefined,
+	closeLogin: () => undefined,
+	openRegister: () => undefined,
+	closeRegister: () => undefined
 } as UserContextType)

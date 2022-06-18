@@ -7,7 +7,8 @@ type UserProviderProps = {
 
 export const UserProvider = ({ children }: UserProviderProps) => {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-
+	const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false)
+	const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false)
 	// listen on keydow events esc and close modal
 	useEffect(() => {
 		const keyDownHandler = (e: KeyboardEvent) => {
@@ -31,12 +32,34 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 		setIsModalOpen(false)
 	}
 
+	const openLoginHandler = () => {
+		setIsLoginOpen(true)
+	}
+
+	const closeLoginHandler = () => {
+		setIsLoginOpen(false)
+	}
+
+	const openRegisterHandler = () => {
+		setIsRegisterOpen(true)
+	}
+
+	const closeRegisterHandler = () => {
+		setIsRegisterOpen(false)
+	}
+
 	return (
 		<UserContext.Provider
 			value={{
 				isModalOpen,
-				openUserModal: openModalHandler,
-				closeUserModal: closeModalHandler
+				isLoginOpen,
+				isRegisterOpen,
+				openModal: openModalHandler,
+				closeModal: closeModalHandler,
+				openLogin: openLoginHandler,
+				closeLogin: closeLoginHandler,
+				openRegister: openRegisterHandler,
+				closeRegister: closeRegisterHandler
 			}}
 		>{children}
 		</UserContext.Provider>
