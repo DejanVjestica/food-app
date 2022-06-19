@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { faCartShopping, faBars } from '@fortawesome/free-solid-svg-icons'
 
 // styles
 import headerStyles from './Header.module.scss'
@@ -8,15 +8,16 @@ import headerStyles from './Header.module.scss'
 // components
 import { Button } from '../../UI/Button/Button'
 import { Wrapper } from '../../Helpers/Wrapper/Wrapper'
-import { Navigation } from '../../Layout/Navigation/Navigation'
 
 // contexts
 import { CartContext } from '../../../context/Cart/cart-context'
+import { UserContext } from '../../../context/User/user-context'
 
 export const Header = () => {
 	const [isBtnHighlighted, setBtnHighlighted] = useState<boolean>(false)
 
 	const { openCartModal, totalPrice, totalItems, cartItems } = useContext(CartContext)
+	const { openModal } = useContext(UserContext)
 
 	useEffect(() => {
 		if (cartItems.length === 0) {
@@ -49,7 +50,9 @@ export const Header = () => {
 					<span className={headerStyles.badge}>{totalItems}</span>
 					<span className={headerStyles.price}>{`${totalPrice.toFixed(2)} €`}</span>
 				</Button>
-				<Navigation variant='header' />
+				<Button onClick={openModal} variant='icon' modifier='is-no-border'>
+					<FontAwesomeIcon icon={faBars} />
+				</Button>
 			</Wrapper>
 		</>
 	)
