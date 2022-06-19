@@ -14,6 +14,8 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 		const keyDownHandler = (e: KeyboardEvent) => {
 			if (e.key === 'Escape' && isModalOpen) {
 				setIsModalOpen(false)
+				setIsLoginOpen(false)
+				setIsRegisterOpen(false)
 			}
 		}
 
@@ -30,9 +32,12 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
 	const closeModalHandler = () => {
 		setIsModalOpen(false)
+		setIsLoginOpen(false)
+		setIsRegisterOpen(false)
 	}
 
 	const openLoginHandler = () => {
+		if (isRegisterOpen) setIsRegisterOpen(false)
 		setIsLoginOpen(true)
 	}
 
@@ -41,6 +46,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 	}
 
 	const openRegisterHandler = () => {
+		if (isLoginOpen) setIsLoginOpen(false)
 		setIsRegisterOpen(true)
 	}
 
