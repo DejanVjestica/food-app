@@ -1,0 +1,23 @@
+.wrapper {
+	> button {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+	}
+	
+	.controls {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	
+		& > * {
+			flex: 1;
+		}
+	
+		& > *:first-child {
+			margin-right: 1rem;
+		}
+	
+		
+	}
+}

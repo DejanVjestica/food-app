@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import { UserContext } from '../../../context/User/user-context'
 
 // Styles
-import styles from './Navigation.module.scss'
+import styles from './Register.module.scss'
 
 // Components
 import { Button } from '../../UI/Button/Button'
@@ -12,11 +12,11 @@ import { Form } from '../../UI/Form/Form'
 import { Input } from '../../UI/Input/Input'
 
 export const Register = () => {
-	const { closeRegister, openLogin } = useContext(UserContext)
+	const { openLogin } = useContext(UserContext)
 
 	return (
-		<>
-			<p>Please login</p>
+		<div className={styles.wrapper}>
+			<p>Please register</p>
 			<Form>
 				<Input type='text' placeholder='Name' label='Name' id='Name' />
 				<Input type='email' placeholder='Email' label='Email' id='email' />
@@ -24,8 +24,7 @@ export const Register = () => {
 				<Button variant='primary'>Register</Button>
 			</Form>
 
-			<Button variant='secondary' onClick={closeRegister}>Close</Button>
 			<Button variant='simple' onClick={openLogin} >Login</Button>
-		</>
+		</div>
 	)
 }

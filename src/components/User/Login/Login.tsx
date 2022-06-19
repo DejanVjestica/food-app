@@ -9,13 +9,13 @@ import { Input } from '../../UI/Input/Input'
 import { UserContext } from '../../../context/User/user-context'
 
 // Styles
-import styles from './Cart.module.scss'
+import styles from './Login.module.scss'
 
 export const Login = () => {
-	const { closeLogin, openRegister } = useContext(UserContext)
+	const { openRegister } = useContext(UserContext)
 
 	return (
-		<>
+		<div className={styles.wrapper}>
 			<p>Please login</p>
 			<Form>
 				<Input type='email' placeholder='Email' label='Email' id='email' />
@@ -23,8 +23,7 @@ export const Login = () => {
 				<Button variant='primary'>Login</Button>
 			</Form>
 
-			<Button variant='secondary' onClick={closeLogin}>Close</Button>
 			<Button variant='simple' onClick={openRegister} >Register</Button>
-		</>
+		</div>
 	)
 }
