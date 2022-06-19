@@ -66,7 +66,7 @@ export const MealItemForm = ({ item }: MealItemFormProps) => {
 				step="1"
 				value={quantityValue}
 				label="Amount"
-				id="cart"
+				id={item.id.toString()}
 				onChange={onQuantityChangeHandler}
 			/>
 			{!quantityError && <p className={styles.error}>Please enter a valid amount</p>}
