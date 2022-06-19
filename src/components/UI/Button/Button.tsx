@@ -4,7 +4,7 @@ import styles from './Button.module.scss'
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 	children: React.ReactNode,
 	variant?: 'primary' | 'secondary' | 'icon' | 'simple'
-	modifier?: 'is-color-white',
+	modifier?: string,
 } & Omit<React.ComponentProps<'button'>, 'children'>
 
 export const Button = (props: ButtonProps) => {
