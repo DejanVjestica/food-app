@@ -16,10 +16,10 @@
 		font-family: inherit;
 		font-size: small;
 		font-weight: inherit;
-		margin-bottom: 0.5rem;
 		padding: 0.5rem;
 		transition: all 0.2s ease-in-out;
 		width: 100%;
+		margin-bottom: 1rem;
 		
 		&:focus {
 			outline: none;
@@ -27,4 +27,15 @@
 		}
 	}
 
+	.error {
+		color: #f00;
+		font-size: small;
+		margin-top: 0;
+		margin-bottom: 1rem;
+	}
+
+
+	input + .error {
+		margin-top: -1rem;
+	}
 }
