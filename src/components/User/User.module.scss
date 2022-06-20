@@ -20,4 +20,23 @@
 	
 		
 	}
+
+	div {
+		display: flex;
+		flex-direction: column;
+		
+		form {
+			margin-bottom: 1rem;
+			display: flex;
+			flex-wrap: wrap;
+	
+			& > * {
+				flex: 100%;
+			}
+	
+			& > *:last-child {
+				margin-top: 1rem;
+			}
+		}
+	}
 }
