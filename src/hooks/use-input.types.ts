@@ -1,6 +1,7 @@
 export type UseInputConfigType = {
 	defaultValue?: string
 	checkTouch?: boolean
+	errorText?: string
 	validationHandler: (value: string) => boolean
 }
 

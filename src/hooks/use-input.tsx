@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useEffect } from 'react'
 
 // Types
 import { UseInputConfigType, UseInputReturnType, UseInputReducerAction, UseInputStateType } from './use-input.types'
@@ -40,7 +40,7 @@ export const useInput = ({ defaultValue = '', checkTouch, validationHandler }: U
 	if (checkTouch) {
 		hasError = !valueIsValid && state.isTouched
 	} else {
-		hasError = !valueIsValid
+		hasError = valueIsValid
 	}
 
 	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,6 +48,7 @@ export const useInput = ({ defaultValue = '', checkTouch, validationHandler }: U
 	}
 
 	const onBlurHandler = () => {
+		if (!checkTouch) return
 		action({ type: 'BLUR' })
 	}
 
