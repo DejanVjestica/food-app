@@ -1,5 +1,9 @@
 import React, { useContext, useState } from 'react'
 
+// Fontawesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAdd } from '@fortawesome/free-solid-svg-icons'
+
 // components
 import { Button } from '../../UI/Button/Button'
 import { Input } from '../../UI/Input/Input'
@@ -72,7 +76,9 @@ export const MealItemForm = ({ item }: MealItemFormProps) => {
 				useInputConfig={quantityConfig}
 				retrieveValues={useInputQuantityData}
 			/>
-			<Button type="submit" variant='primary'>+ Add to cart</Button>
+			<Button type="submit" variant='icon'>
+				<FontAwesomeIcon icon={faAdd} />
+			</Button>
 		</form>
 	)
 }

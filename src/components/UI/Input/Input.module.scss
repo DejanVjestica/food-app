@@ -6,6 +6,7 @@
 
 	> label{
 		margin-bottom: 0.5rem;
+		margin-right: 1rem;
 	}
 	
 	> input {
@@ -29,11 +30,10 @@
 
 	.error {
 		color: #f00;
-		font-size: small;
-		margin-top: 0;
+		font-size: 0.8rem;
 		margin-bottom: 1rem;
+		margin-top: 0;
 	}
-
 
 	input + .error {
 		margin-top: -1rem;
