@@ -11,20 +11,15 @@
 		flex-wrap: wrap;
 	
 		& > * {
-			flex: 1;
+			width: 48%;
 		}
 	
 		& > *:first-child {
 			margin-right: 1rem;
 		}
-	
-		
 	}
 
 	div {
-		display: flex;
-		flex-direction: column;
-		
 		form {
 			margin-bottom: 1rem;
 			display: flex;

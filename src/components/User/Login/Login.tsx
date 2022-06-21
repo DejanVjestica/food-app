@@ -81,7 +81,7 @@ export const Login = () => {
 	}
 
 	return (
-		<div>
+		<div className={styles.wrapper}>
 			<p>Please login</p>
 			<Form onSubmit={onSubmitHandler}>
 				<Input type='email' placeholder='Email' label='Email' id='email' useInputConfig={configEmail} retrieveValues={useInputEmailData}/>

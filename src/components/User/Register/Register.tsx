@@ -11,6 +11,9 @@ import { Button } from '../../UI/Button/Button'
 import { Form } from '../../UI/Form/Form'
 import { Input } from '../../UI/Input/Input'
 
+// Styles
+import styles from './Register.module.scss'
+
 export const Register = () => {
 	const { openLogin } = useContext(UserContext)
 
@@ -95,7 +98,7 @@ export const Register = () => {
 	}
 
 	return (
-		<div>
+		<div className={styles.wrapper}>
 			<p>Please register</p>
 			<Form onSubmit={onSubmitHandler}>
 				<Input key={'Name'} type='text' placeholder='Name' label='Name' id='Name' useInputConfig={configName} retrieveValues={useInputNameData}/>
