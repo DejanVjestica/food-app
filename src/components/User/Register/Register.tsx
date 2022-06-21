@@ -1,5 +1,9 @@
 import React, { useContext, useState } from 'react'
 
+// Firebase
+import { auth, registerWithEmailAndPassword, signInWithGoogle } from '../../../firebase'
+import { useAuthState } from 'react-firebase-hooks/auth'
+
 // Contexts
 import { UserContext } from '../../../context/User/user-context'
 
@@ -10,17 +14,29 @@ import { retrieveValuesParams } from '../../../hooks/use-input.types'
 import { Button } from '../../UI/Button/Button'
 import { Form } from '../../UI/Form/Form'
 import { Input } from '../../UI/Input/Input'
+import { Img } from '../../UI/Img/Img'
 
 // Styles
 import styles from './Register.module.scss'
 
+// Icons
+import googleLogo from '../../../assets/google-brands.svg'
+
 export const Register = () => {
+	// Context
 	const { openLogin } = useContext(UserContext)
+
+	// Refs
+	const nameRef = React.createRef<HTMLInputElement>()
+	const emailRef = React.createRef<HTMLInputElement>()
+	const passwordRef = React.createRef<HTMLInputElement>()
 
 	// States
 	const [nameHasError, setNameHasError] = useState(true)
 	const [emailHasError, setEmailHasError] = useState(true)
 	const [passwordHasError, setPasswordHasError] = useState(true)
+
+	const [user, loading, error] = useAuthState(auth)
 
 	// Name input config, and dataHandler
 	/// /////////////////////////////////////
@@ -92,18 +108,32 @@ export const Register = () => {
 			return
 		}
 
+		const name = nameRef.current!.value
+		const email = emailRef.current!.value
+		const password = passwordRef.current!.value
+
+		registerWithEmailAndPassword(name, email, password)
+
 		resetUseInputNameState()
 		resetUseInputEmailState()
 		resetUseInputPasswordState()
 	}
 
+	const loginWithGoogleHandler = () => {
+		signInWithGoogle()
+	}
+
 	return (
 		<div className={styles.wrapper}>
 			<p>Please register</p>
+			<Button variant='icon' onClick={loginWithGoogleHandler}>
+				<Img srcSet={googleLogo}></Img>
+				<span>Register with google</span>
+			</Button>
 			<Form onSubmit={onSubmitHandler}>
-				<Input key={'Name'} type='text' placeholder='Name' label='Name' id='Name' useInputConfig={configName} retrieveValues={useInputNameData}/>
-				<Input key={'Email'}type='email' placeholder='Email' label='Email' id='email' useInputConfig={configEmail} retrieveValues={useInputEmailData}/>
-				<Input key={'Password'} type='password' placeholder='Password' label='Password' id='password' useInputConfig={configPassword} retrieveValues={useInputPasswordData}/>
+				<Input ref={nameRef} key={'Name'} type='text' placeholder='Name' label='Name' id='Name' useInputConfig={configName} retrieveValues={useInputNameData}/>
+				<Input ref={emailRef} key={'Email'}type='email' placeholder='Email' label='Email' id='email' useInputConfig={configEmail} retrieveValues={useInputEmailData}/>
+				<Input ref={passwordRef} key={'Password'} type='password' placeholder='Password' label='Password' id='password' useInputConfig={configPassword} retrieveValues={useInputPasswordData}/>
 				<Button variant='primary'>Register</Button>
 			</Form>
 
