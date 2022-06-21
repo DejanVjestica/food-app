@@ -1,5 +1,5 @@
-/* eslint-disable no-tabs */
-import React, { useEffect, useState } from 'react'
+/* eslint-disable react/display-name */
+import React, { useEffect, useState, forwardRef } from 'react'
 
 // custom hooks
 import { useInput } from '../../../hooks/use-input'
@@ -17,7 +17,7 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 	useInputConfig: UseInputConfigType
 }
 
-export const Input = (props: InputProps) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) => {
 	// Props
 	const { label, useInputConfig, retrieveValues, ...newProps } = props
 
@@ -48,8 +48,8 @@ export const Input = (props: InputProps) => {
 	return (
 		<div className={styles.input__wrapper}>
 			{label && <label htmlFor={newProps.id}>{label}</label>}
-			<input {...newProps} onChange={onChangeHandler} onBlur={onBlurHandler} value={value} />
+			<input ref={ref} {...newProps} onChange={onChangeHandler} onBlur={onBlurHandler} value={value} />
 			{hasError && <p className={styles.error}>{errorText}</p>}
 		</div>
 	)
-}
+})
