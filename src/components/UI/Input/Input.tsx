@@ -1,5 +1,5 @@
 /* eslint-disable no-tabs */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // custom hooks
 import { useInput } from '../../../hooks/use-input'
@@ -18,11 +18,17 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 }
 
 export const Input = (props: InputProps) => {
+	// Props
 	const { label, useInputConfig, retrieveValues, ...newProps } = props
 
+	// State
+	const [errorText, setErrorText] = useState(useInputConfig.defaultValue)
+
+	// Custom hook
 	const {
 		value,
 		hasError,
+		newErrorText,
 		onChangeHandler,
 		onBlurHandler,
 		resetState
@@ -30,16 +36,20 @@ export const Input = (props: InputProps) => {
 	} = useInput(useInputConfig as UseInputConfigType)
 
 	// Effects
+	let newErrorMessage
 	useEffect(() => {
 		if (!retrieveValues) return
 		retrieveValues({ value, hasError, resetState })
-	}, [retrieveValues, value, hasError])
+
+		newErrorMessage = newErrorText !== '' ? newErrorText : useInputConfig.errorText
+		setErrorText(newErrorMessage)
+	}, [retrieveValues, value, hasError, newErrorText])
 
 	return (
 		<div className={styles.input__wrapper}>
 			{label && <label htmlFor={newProps.id}>{label}</label>}
-			<input {...newProps} onChange={onChangeHandler} onBlur={onBlurHandler} />
-			{hasError && <p className={styles.error}>{useInputConfig.errorText}</p>}
+			<input {...newProps} onChange={onChangeHandler} onBlur={onBlurHandler} value={value} />
+			{hasError && <p className={styles.error}>{errorText}</p>}
 		</div>
 	)
 }
