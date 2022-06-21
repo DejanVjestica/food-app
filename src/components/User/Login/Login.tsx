@@ -1,9 +1,14 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
+
+// Firebase
+import { auth, logInWithEmailAndPassword, signInWithGoogle } from '../../../firebase'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 // Components
 import { Button } from '../../UI/Button/Button'
 import { Form } from '../../UI/Form/Form'
 import { Input } from '../../UI/Input/Input'
+import { Img } from '../../UI/Img/Img'
 
 // Types
 import { retrieveValuesParams } from '../../../hooks/use-input.types'
@@ -14,13 +19,30 @@ import { UserContext } from '../../../context/User/user-context'
 // Styles
 import styles from './Login.module.scss'
 
+// Icons
+import googleLogo from '../../../assets/google-brands.svg'
+
 export const Login = () => {
+	// Refs
+	const emailRef = React.createRef<HTMLInputElement>()
+	const passwordRef = React.createRef<HTMLInputElement>()
+
 	// States
 	const [emailHasError, setEmailHasError] = useState(true)
 	const [passwordHasError, setPasswordHasError] = useState(true)
 
 	// Context
 	const { openRegister } = useContext(UserContext)
+
+	const [user, loading, error] = useAuthState(auth)
+
+	useEffect(() => {
+		if (loading) {
+			// maybe trigger a loading screen
+			return
+		}
+		if (user)console.log(user)
+	}, [user, loading])
 
 	// Email input config, and dataHandler
 	/// /////////////////////////////////////
@@ -76,16 +98,28 @@ export const Login = () => {
 			return
 		}
 
+		const email = emailRef.current?.value || ''
+		const password = passwordRef.current?.value || ''
+		logInWithEmailAndPassword(email, password)
+
 		resetUseInputEmailState()
 		resetUseInputPasswordState()
+	}
+
+	const loginWithGoogleHandler = () => {
+		signInWithGoogle()
 	}
 
 	return (
 		<div className={styles.wrapper}>
 			<p>Please login</p>
+			<Button variant='icon' onClick={loginWithGoogleHandler}>
+				<Img srcSet={googleLogo}></Img>
+				<span>Login with google</span>
+			</Button>
 			<Form onSubmit={onSubmitHandler}>
-				<Input type='email' placeholder='Email' label='Email' id='email' useInputConfig={configEmail} retrieveValues={useInputEmailData}/>
-				<Input type='password' placeholder='Password' label='Password' id='password' useInputConfig={configPassword} retrieveValues={useInputPasswordData}/>
+				<Input ref={emailRef} type='email' placeholder='Email' label='Email' id='email' useInputConfig={configEmail} retrieveValues={useInputEmailData}/>
+				<Input ref={passwordRef} type='password' placeholder='Password' label='Password' id='password' useInputConfig={configPassword} retrieveValues={useInputPasswordData}/>
 				<Button variant='primary'>Login</Button>
 			</Form>
 
