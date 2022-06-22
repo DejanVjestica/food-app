@@ -24,7 +24,7 @@ import googleLogo from '../../../assets/google-brands.svg'
 
 export const Register = () => {
 	// Context
-	const { openLogin } = useContext(UserContext)
+	const { openLogin, closeRegister } = useContext(UserContext)
 
 	// Refs
 	const nameRef = React.createRef<HTMLInputElement>()
@@ -117,6 +117,8 @@ export const Register = () => {
 		resetUseInputNameState()
 		resetUseInputEmailState()
 		resetUseInputPasswordState()
+
+		closeRegister()
 	}
 
 	const loginWithGoogleHandler = () => {

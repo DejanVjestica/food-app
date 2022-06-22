@@ -32,7 +32,7 @@ export const Login = () => {
 	const [passwordHasError, setPasswordHasError] = useState(true)
 
 	// Context
-	const { openRegister } = useContext(UserContext)
+	const { openRegister, closeLogin } = useContext(UserContext)
 
 	const [user, loading, error] = useAuthState(auth)
 
@@ -104,6 +104,8 @@ export const Login = () => {
 
 		resetUseInputEmailState()
 		resetUseInputPasswordState()
+
+		closeLogin()
 	}
 
 	const loginWithGoogleHandler = () => {
