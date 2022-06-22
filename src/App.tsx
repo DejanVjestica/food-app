@@ -17,15 +17,9 @@ import styles from './App.module.scss'
 import { CartContext } from './context/Cart/cart-context'
 import { UserContext } from './context/User/user-context'
 
-// Cookies
-// import { useCookies } from 'react-cookie'
-
 export const App = () => {
 	const { isModalOpen: cartModal } = useContext(CartContext)
 	const { isModalOpen: userModal } = useContext(UserContext)
-	// const [cookies, setCookies] = useCookies(['user'])
-
-	// const components = cookies.user ? <Restaurants /> : <Welcome />
 
 	return (
 		<>
