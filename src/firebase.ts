@@ -13,8 +13,10 @@ import { getFirestore, query, getDocs, collection, where, addDoc } from 'firebas
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseApiKEy = process.env.REACT_APP_FIREBASE_API_KEY
+
 const firebaseConfig = {
-	apiKey: 'AIzaSyD-5RbSwbB_eaBEh10qK17BI_bhVets8u8',
+	apiKey: firebaseApiKEy,
 	authDomain: 'food-app-ed31b.firebaseapp.com',
 	databaseURL: 'https://food-app-ed31b-default-rtdb.europe-west1.firebasedatabase.app',
 	projectId: 'food-app-ed31b',
