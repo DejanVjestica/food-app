@@ -1,3 +1,4 @@
+/* eslint-disable no-tabs */
 /* eslint-disable space-before-function-paren */
 import { initializeApp } from 'firebase/app'
 import {
@@ -7,16 +8,19 @@ import {
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
 	sendPasswordResetEmail,
-	signOut
+	signOut,
+	onAuthStateChanged,
+	sendEmailVerification,
+	updateProfile
 } from 'firebase/auth'
-import { getFirestore, query, getDocs, collection, where, addDoc } from 'firebase/firestore'
+import { getFirestore } from 'firebase/firestore'
+import { getDatabase, ref, set } from 'firebase/database'
 
-// Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseApiKEy = process.env.REACT_APP_FIREBASE_API_KEY
+// const firebaseApiKey = process.env.REACT_APP_FIREBASE_API_KEY
 
 const firebaseConfig = {
-	apiKey: firebaseApiKEy,
+	apiKey: 'AIzaSyD-5RbSwbB_eaBEh10qK17BI_bhVets8u8',
 	authDomain: 'food-app-ed31b.firebaseapp.com',
 	databaseURL: 'https://food-app-ed31b-default-rtdb.europe-west1.firebasedatabase.app',
 	projectId: 'food-app-ed31b',
@@ -30,22 +34,22 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 const db = getFirestore(app)
 
+const database = getDatabase()
+
 const googleProvider = new GoogleAuthProvider()
 
 const signInWithGoogle = async () => {
 	try {
 		const res = await signInWithPopup(auth, googleProvider)
 		const user = res.user
-		const q = query(collection(db, 'users'), where('uid', '==', user.uid))
-		const docs = await getDocs(q)
-		if (docs.docs.length === 0) {
-			await addDoc(collection(db, 'users'), {
-				uid: user.uid,
-				name: user.displayName,
-				authProvider: 'google',
-				email: user.email
-			})
-		}
+		await set(ref(database, `users/${user.uid}/username`), {
+			name: user.displayName,
+			email: user.email,
+			photoUrl: user.photoURL,
+			isVerified: user.emailVerified,
+			isAnonymous: user.isAnonymous,
+			phoneNumber: user.phoneNumber
+		})
 	} catch (err: any) {
 		console.error(err)
 		alert(err.message)
@@ -65,12 +69,20 @@ const registerWithEmailAndPassword = async (name: string, email: string, passwor
 	try {
 		const res = await createUserWithEmailAndPassword(auth, email, password)
 		const user = res.user
-		await addDoc(collection(db, 'users'), {
-			uid: user.uid,
-			name,
-			authProvider: 'local',
-			email
+
+		await updateProfile(user, {
+			displayName: name
 		})
+
+		await set(ref(database, `users/${user.uid}/username`), {
+			name,
+			email,
+			photoUrl: user.photoURL,
+			isVerified: user.emailVerified,
+			isAnonymous: user.isAnonymous,
+			phoneNumber: user.phoneNumber
+		})
+		await sendEmailVerification(user)
 	} catch (err: any) {
 		console.error(err)
 		alert(err.message)
@@ -91,4 +103,4 @@ const logout = () => {
 	signOut(auth)
 }
 
-export { auth, db, signInWithGoogle, logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, logout }
+export { auth, db, signInWithGoogle, logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, onAuthStateChanged, logout }
