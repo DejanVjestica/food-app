@@ -14,8 +14,10 @@ import { CartContext } from '../../../context/Cart/cart-context'
 import { UserContext } from '../../../context/User/user-context'
 
 export const Header = () => {
+	// state
 	const [isBtnHighlighted, setBtnHighlighted] = useState<boolean>(false)
 
+	// contexts
 	const { openCartModal, totalPrice, totalItems, cartItems } = useContext(CartContext)
 	const { openModal } = useContext(UserContext)
 
@@ -41,7 +43,6 @@ export const Header = () => {
 		<>
 			<Wrapper as="header" className={[headerStyles.header, buttonClasses].join(' ')}>
 				<h1 className={headerStyles.headline}>Food app</h1>
-
 				<Button onClick={openCartModal} variant='primary'>
 					<span className={headerStyles.icon}>
 						<FontAwesomeIcon icon={faCartShopping} />
