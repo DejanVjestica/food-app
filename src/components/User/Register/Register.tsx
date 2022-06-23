@@ -1,8 +1,7 @@
 import React, { useContext, useState } from 'react'
 
 // Firebase
-import { auth, registerWithEmailAndPassword, signInWithGoogle } from '../../../firebase'
-import { useAuthState } from 'react-firebase-hooks/auth'
+import { registerWithEmailAndPassword, signInWithGoogle } from '../../../firebase'
 
 // Contexts
 import { UserContext } from '../../../context/User/user-context'
@@ -35,8 +34,6 @@ export const Register = () => {
 	const [nameHasError, setNameHasError] = useState(true)
 	const [emailHasError, setEmailHasError] = useState(true)
 	const [passwordHasError, setPasswordHasError] = useState(true)
-
-	const [user, loading, error] = useAuthState(auth)
 
 	// Name input config, and dataHandler
 	/// /////////////////////////////////////
