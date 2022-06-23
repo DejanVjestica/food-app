@@ -10,6 +10,7 @@ import styles from './Navigation.module.scss'
 // context
 import { UserContext } from '../../../context/User/user-context'
 
+// types
 type NavigationProps = {
 	variant: 'header' | 'footer'
 }
