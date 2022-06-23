@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { UserContext } from './user-context'
 
-type UserProviderProps = {
-	children: React.ReactNode
-}
-
-export const UserProvider = ({ children }: UserProviderProps) => {
+export const UserProvider = ({ children }: {children: React.ReactNode}) => {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 	const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false)
 	const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false)
@@ -66,8 +62,8 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 				closeLogin: closeLoginHandler,
 				openRegister: openRegisterHandler,
 				closeRegister: closeRegisterHandler
-			}}
-		>{children}
+			}}>
+			{children}
 		</UserContext.Provider>
 	)
 }
