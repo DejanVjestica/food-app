@@ -1,0 +1,42 @@
+/* ---------------------------------------------------
+Default Navigation styles
+--------------------------------------------------- */
+.navigation__default {
+	.navigation__list{
+		list-style-type: none;
+	}
+}
+
+/* ---------------------------------------------------
+Header Navigation styles
+--------------------------------------------------- */
+.navigation__header {
+	.navigation__list {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		font-size: 1rem;
+		transition: all 0.3s ease-in-out;
+		margin-left: 1rem;
+	}
+
+	li {
+		margin-right: .3rem;
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+
+	a {
+		color: white;
+		text-decoration: none;
+		transition: all 0.3s ease-in-out;
+
+		&:hover,
+		&:active {
+			color: #e2e2e2;
+		}
+	}
+}

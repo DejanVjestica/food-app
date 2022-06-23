@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useState, useEffect } from 'react'
 
 // Types
 import { UseInputConfigType, UseInputReturnType, UseInputReducerAction, UseInputStateType } from './use-input.types'
@@ -30,17 +30,26 @@ const useInputReducer = (prewState: UseInputStateType, action: UseInputReducerAc
 	}
 }
 
-export const useInput = ({ defaultValue = '', checkTouch, validationHandler }: UseInputConfigType) => {
+export const useInput = ({ defaultValue = '', checkTouch, validationHandler, errorText, generateNewErrorText }: UseInputConfigType) => {
 	// Reducer
 	const [state, action] = useReducer(useInputReducer, { value: defaultValue, isTouched: false })
-
+	// State
+	const [newErrorText, setNewErrorText] = useState('')
 	const valueIsValid = validationHandler(state.value)
+	// Effects
+	let errorTexttest
+	useEffect(() => {
+		if (generateNewErrorText) {
+			errorTexttest = generateNewErrorText(state.value)
+			setNewErrorText(errorTexttest)
+		}
+	}, [state.value])
 
 	let hasError
 	if (checkTouch) {
 		hasError = !valueIsValid && state.isTouched
 	} else {
-		hasError = !valueIsValid
+		hasError = valueIsValid
 	}
 
 	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,6 +57,7 @@ export const useInput = ({ defaultValue = '', checkTouch, validationHandler }: U
 	}
 
 	const onBlurHandler = () => {
+		if (!checkTouch) return
 		action({ type: 'BLUR' })
 	}
 
@@ -58,6 +68,8 @@ export const useInput = ({ defaultValue = '', checkTouch, validationHandler }: U
 	return {
 		value: state.value,
 		hasError,
+		errorText,
+		newErrorText,
 		onChangeHandler,
 		onBlurHandler,
 		resetState

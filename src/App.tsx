@@ -1,18 +1,26 @@
 import React, { useContext } from 'react'
 
+// Components
 import { Header } from './components/Layout/Header/Header'
 import { Stage } from './components/Layout/Stage/Stage'
 import { Meals } from './components/Meals/Meals'
 import { Wrapper } from './components/Helpers/Wrapper/Wrapper'
 import { Cart } from './components/Cart/Cart'
+// import { Welcome } from './components/Welcome/Welcome'
+// import { Restaurants } from './components/Restaurants/Restaurants'
+import { User } from './components/User/User'
 
+// Styles
 import styles from './App.module.scss'
 
 // Contexts
 import { CartContext } from './context/Cart/cart-context'
+import { UserContext } from './context/User/user-context'
 
 export const App = () => {
-	const { isModalOpen } = useContext(CartContext)
+	const { isModalOpen: cartModal } = useContext(CartContext)
+	const { isModalOpen: userModal } = useContext(UserContext)
+
 	return (
 		<>
 			<Header />
@@ -20,7 +28,8 @@ export const App = () => {
 			<Wrapper as="main" className={styles.main}>
 				<Meals />
 			</Wrapper>
-			{isModalOpen && <Cart></Cart>}
+			{cartModal && <Cart></Cart>}
+			{userModal && <User></User>}
 		</>
 	)
 }

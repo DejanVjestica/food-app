@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext } from 'react'
 
 // Types
@@ -9,11 +8,11 @@ export const CartContext = createContext({
 	totalPrice: 0,
 	totalItems: 0,
 	isModalOpen: false,
-	openCartModal: () => {},
-	closeCartModal: () => {},
-	addItem: () => {},
-	removeItem: () => {},
-	clearCart: () => {},
-	addNote: () => {},
-	removeNote: () => {}
+	openCartModal: () => undefined,
+	closeCartModal: () => undefined,
+	addItem: () => undefined,
+	removeItem: () => undefined,
+	clearCart: () => undefined,
+	addNote: () => undefined,
+	removeNote: () => undefined
 } as CartContextType)

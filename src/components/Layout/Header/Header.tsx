@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { faCartShopping, faBars } from '@fortawesome/free-solid-svg-icons'
 
 // styles
 import headerStyles from './Header.module.scss'
@@ -11,11 +11,13 @@ import { Wrapper } from '../../Helpers/Wrapper/Wrapper'
 
 // contexts
 import { CartContext } from '../../../context/Cart/cart-context'
+import { UserContext } from '../../../context/User/user-context'
 
 export const Header = () => {
 	const [isBtnHighlighted, setBtnHighlighted] = useState<boolean>(false)
 
 	const { openCartModal, totalPrice, totalItems, cartItems } = useContext(CartContext)
+	const { openModal } = useContext(UserContext)
 
 	useEffect(() => {
 		if (cartItems.length === 0) {
@@ -39,6 +41,7 @@ export const Header = () => {
 		<>
 			<Wrapper as="header" className={[headerStyles.header, buttonClasses].join(' ')}>
 				<h1 className={headerStyles.headline}>Food app</h1>
+
 				<Button onClick={openCartModal} variant='primary'>
 					<span className={headerStyles.icon}>
 						<FontAwesomeIcon icon={faCartShopping} />
@@ -46,6 +49,9 @@ export const Header = () => {
 					<span>Your cart</span>
 					<span className={headerStyles.badge}>{totalItems}</span>
 					<span className={headerStyles.price}>{`${totalPrice.toFixed(2)} €`}</span>
+				</Button>
+				<Button onClick={openModal} variant='icon' modifier='is-no-border'>
+					<FontAwesomeIcon icon={faBars} />
 				</Button>
 			</Wrapper>
 		</>

@@ -1,0 +1,37 @@
+.wrapper {
+	> button {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+	}
+	
+	.controls {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	
+		& > * {
+			width: 48%;
+		}
+	
+		& > *:first-child {
+			margin-right: 1rem;
+		}
+	}
+
+	div {
+		form {
+			margin-bottom: 1rem;
+			display: flex;
+			flex-wrap: wrap;
+	
+			& > * {
+				flex: 100%;
+			}
+	
+			& > *:last-child {
+				margin-top: 1rem;
+			}
+		}
+	}
+}

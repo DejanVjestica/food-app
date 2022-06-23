@@ -1,0 +1,41 @@
+.input__wrapper {
+	display: flex;
+	flex-direction: column;
+	flex:1;
+	font-size: small;
+
+	> label{
+		margin-bottom: 0.5rem;
+		margin-right: 1rem;
+	}
+	
+	> input {
+		background-color: #fff;
+		border-radius: 0.25rem;
+		border: 1px solid #ccc;
+		color: inherit;
+		font-family: inherit;
+		font-size: small;
+		font-weight: inherit;
+		padding: 0.5rem;
+		transition: all 0.2s ease-in-out;
+		width: 100%;
+		margin-bottom: 1rem;
+		
+		&:focus {
+			outline: none;
+			border-color: #000;
+		}
+	}
+
+	.error {
+		color: #f00;
+		font-size: 0.8rem;
+		margin-bottom: 1rem;
+		margin-top: 0;
+	}
+
+	input + .error {
+		margin-top: -1rem;
+	}
+}

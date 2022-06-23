@@ -1,0 +1,22 @@
+.profile {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 2rem;
+	align-items: center;
+}
+
+.info {
+	margin-left: 1rem;
+
+	h2 {
+		font-size: medium;
+		margin: 0;
+		width: 100%;
+	}
+
+	button {
+		width: 100%;
+		padding-left: 0;
+		text-align: left;
+	}
+}

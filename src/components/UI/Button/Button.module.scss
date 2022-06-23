@@ -53,6 +53,10 @@ Variant: Button with only icon
 	&:active {
 		border-color: #002ed6;
 	}
+
+	&.is-no-border {
+		border: none;
+	}
 }
 
 /* ---------------------------------------------------
@@ -63,4 +67,8 @@ Variant: Button only a wordn
 	font-size: small;
 	background-color: transparent;
 	text-decoration: underline;
+
+	&.is-color-white{
+		color: white;
+	}
 }
