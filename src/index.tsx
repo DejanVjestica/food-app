@@ -1,8 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './index.scss'
-import { App } from './App'
+import { BrowserRouter } from 'react-router-dom'
+
 import reportWebVitals from './reportWebVitals'
+
+// components
+import { App } from './App'
+
+// styles
+import './index.scss'
+
 // contexts
 import { SrcSetProvider } from './context/srcSet-context.tsx/srcSet-provider'
 import { CartProvider } from './context/Cart/cart-provider'
@@ -14,15 +21,17 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
 	<React.StrictMode>
-		<CartProvider>
-			<SrcSetProvider>
-				<CookiesProvider>
-					<UserProvider>
-						<App />
-					</UserProvider>
-				</CookiesProvider>
-			</SrcSetProvider>
-		</CartProvider>
+		<BrowserRouter>
+			<CartProvider>
+				<SrcSetProvider>
+					<CookiesProvider>
+						<UserProvider>
+							<App />
+						</UserProvider>
+					</CookiesProvider>
+				</SrcSetProvider>
+			</CartProvider>
+		</BrowserRouter>
 	</React.StrictMode>
 )
 
