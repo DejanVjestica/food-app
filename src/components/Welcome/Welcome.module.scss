@@ -1,0 +1,18 @@
+.welcome {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	background-color: #fafafa;
+}
+
+.welcome__info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	min-height: 40%;
+	padding: 0 2rem;
+}
