@@ -22,7 +22,7 @@ export const Profile = ({ user }: ProfileProps) => {
 
 	return (
 		<div className={styles.profile}>
-			{userImg && <Img srcSet={userImg} alt='profile image' />}
+			{userImg && <Img src={userImg} alt='profile image' />}
 			<div className={styles.info}>
 				<h2>{userName}</h2>
 				<Button variant='simple'>Pesonal data</Button>

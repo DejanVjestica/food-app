@@ -20,7 +20,7 @@ export const MealItem = (props: MealItemProps) => {
 	return (
 		<li className={styles['meal-item__list-item']}>
 			<div className={styles['meal-item__image']}>
-				<Img src={props.meal.image.src} alt={props.meal.image.alt} srcSet={props.meal.image.srcSet} />
+				<Img src={props.meal.image.src} alt={props.meal.image.alt} srcsetdata={props.meal.image.srcSet} />
 			</div>
 			<div className={styles['meal-item__content']}>
 				<h3>{props.meal.name}</h3>

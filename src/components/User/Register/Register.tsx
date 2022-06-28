@@ -126,7 +126,7 @@ export const Register = () => {
 		<div className={styles.wrapper}>
 			<p>Please register</p>
 			<Button variant='icon' onClick={loginWithGoogleHandler}>
-				<Img srcsetdata={googleLogo}></Img>
+				<Img src={googleLogo}></Img>
 				<span>Register with google</span>
 			</Button>
 			<Form onSubmit={onSubmitHandler}>
