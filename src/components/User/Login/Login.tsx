@@ -11,7 +11,7 @@ import { Input } from '../../UI/Input/Input'
 import { Img } from '../../UI/Img/Img'
 
 // Types
-import { retrieveValuesParams } from '../../../hooks/use-input.types'
+import { retrieveValuesParams } from '../../../types/use-input.types'
 
 // Context
 import { UserContext } from '../../../context/User/user-context'
@@ -116,7 +116,7 @@ export const Login = () => {
 		<div className={styles.wrapper}>
 			<p>Please login</p>
 			<Button variant='icon' onClick={loginWithGoogleHandler}>
-				<Img srcSet={googleLogo}></Img>
+				<Img src={googleLogo}></Img>
 				<span>Login with google</span>
 			</Button>
 			<Form onSubmit={onSubmitHandler}>

@@ -7,7 +7,7 @@ import { registerWithEmailAndPassword, signInWithGoogle } from '../../../firebas
 import { UserContext } from '../../../context/User/user-context'
 
 // Types
-import { retrieveValuesParams } from '../../../hooks/use-input.types'
+import { retrieveValuesParams } from '../../../types/use-input.types'
 
 // Components
 import { Button } from '../../UI/Button/Button'
@@ -126,7 +126,7 @@ export const Register = () => {
 		<div className={styles.wrapper}>
 			<p>Please register</p>
 			<Button variant='icon' onClick={loginWithGoogleHandler}>
-				<Img srcSet={googleLogo}></Img>
+				<Img srcsetdata={googleLogo}></Img>
 				<span>Register with google</span>
 			</Button>
 			<Form onSubmit={onSubmitHandler}>

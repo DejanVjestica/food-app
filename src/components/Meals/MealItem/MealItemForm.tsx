@@ -16,7 +16,7 @@ import { CartContext } from '../../../context/Cart/cart-context'
 
 // types
 import { MealItemType } from '../../../types/cart.types'
-import { UseInputConfigType, retrieveValuesParams } from '../../../hooks/use-input.types'
+import { UseInputConfigType, retrieveValuesParams } from '../../../types/use-input.types'
 
 type MealItemFormProps = {
 	item: MealItemType

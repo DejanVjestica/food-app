@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { SrcSetItem } from '../../types/srcSet.types'
+import { SrcSetItem } from '../../types/use-srcSet.types'
 
 import { SrcSetContext } from './srcSet-context'
 

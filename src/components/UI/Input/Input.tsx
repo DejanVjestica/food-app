@@ -5,7 +5,7 @@ import React, { useEffect, useState, forwardRef } from 'react'
 import { useInput } from '../../../hooks/use-input'
 
 // types
-import { UseInputConfigType, retrieveValuesParams } from '../../../hooks/use-input.types'
+import { UseInputConfigType, retrieveValuesParams } from '../../../types/use-input.types'
 
 // Styles
 import styles from './Input.module.scss'

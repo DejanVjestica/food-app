@@ -1,7 +1,7 @@
 import React, { useReducer, useState, useEffect } from 'react'
 
 // Types
-import { UseInputConfigType, UseInputReturnType, UseInputReducerAction, UseInputStateType } from './use-input.types'
+import { UseInputConfigType, UseInputReturnType, UseInputReducerAction, UseInputStateType } from '../types/use-input.types'
 
 const initialState = {
 	value: '',
