@@ -42,7 +42,9 @@ export const Header = () => {
 	return (
 		<>
 			<Wrapper as="header" className={[headerStyles.header, buttonClasses].join(' ')}>
-				<h1 className={headerStyles.headline}>Food app</h1>
+				<Button as='link' to={'/'}>
+					<h1 className={headerStyles.headline}>Food app</h1>
+				</Button>
 				<Button onClick={openCartModal} variant='primary'>
 					<span className={headerStyles.icon}>
 						<FontAwesomeIcon icon={faCartShopping} />
