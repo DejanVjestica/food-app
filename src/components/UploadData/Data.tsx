@@ -87,7 +87,7 @@ export const dataRestaurants = {
 	},
 	1: {
 		name: 'Italian Restaurant',
-		cover: 'pizza.jpg',
+		cover: 'pizzeria.jpg',
 		description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget consectetur consectetur, nisi nisl consectetur nisi, euismod nisl nisi euismod nisl.',
 		address: '123 Main St',
 		phone: '123-456-7890',
@@ -170,7 +170,7 @@ export const dataRestaurants = {
 	},
 	2: {
 		name: 'Chinese Restaurant',
-		cover: 'chinese.jpg',
+		cover: 'steak.jpg',
 		description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget consectetur consectetur, nisi nisl consectetur nisi, euismod nisl nisi euismod nisl.',
 		address: '123 Main St',
 		phone: '123-456-7890',
