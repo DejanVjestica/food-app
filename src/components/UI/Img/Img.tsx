@@ -7,13 +7,14 @@ import { SrcSetItem } from '../../../types/use-srcSet.types'
 import { useSrcSet } from '../../../hooks/use-srcSet'
 
 type ImgProps = {
-	srcsetdata?: string | SrcSetItem[]
-} & Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'srcSet'>
+	srcsetdata?: SrcSetItem[] | string
+} & Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'srcsetdata'>
 
-export const Img = ({ srcsetdata, ...rest }: ImgProps) => {
-	if (srcsetdata) {
-		const srcSetItems = useSrcSet(srcsetdata)
-		return <img {...rest} srcSet={srcSetItems} />
+export const Img = ({ srcsetdata = '', ...rest }: ImgProps) => {
+	const srcSetItems = useSrcSet(srcsetdata as SrcSetItem[])
+
+	if (!srcsetdata) {
+		return <img {...rest} />
 	}
-	return <img {...rest} />
+	return <img {...rest} srcSet={srcSetItems} />
 }
