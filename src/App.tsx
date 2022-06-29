@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
+import { Route, Routes, Outlet } from 'react-router-dom'
 
 // Components
-import { Header } from './components/Layout/Header/Header'
-import { Stage } from './components/Layout/Stage/Stage'
-import { Meals } from './components/Meals/Meals'
-import { Wrapper } from './components/Helpers/Wrapper/Wrapper'
 import { Cart } from './components/Cart/Cart'
-// import { Welcome } from './components/Welcome/Welcome'
-// import { Restaurants } from './components/Restaurants/Restaurants'
 import { User } from './components/User/User'
+import { Restaurants } from './components/Restaurants/Restaurants'
+import { Welcome } from './components/Welcome/Welcome'
+import { UploadData } from './components/UploadData/UploadData'
+import { Header } from './components/Layout/Header/Header'
+import { AvailableMeals } from './components/Meals/AvailableMeals'
 
 // Styles
 import styles from './App.module.scss'
@@ -24,10 +24,25 @@ export const App = () => {
 	return (
 		<>
 			<Header />
-			<Stage />
-			<Wrapper as="main" className={styles.main}>
-				<Meals />
-			</Wrapper>
+			<aside className={styles.sidebar}>Here comes sidebar</aside>
+			<main className={styles.main}>
+				{/* <UploadData /> */}
+				<Routes>
+					<Route path="/" element={<Welcome />} />
+					<Route path="restaurants" element={<Outlet />}>
+						<Route index element={<Restaurants />} />
+						<Route path=":id" element={<AvailableMeals />} />
+
+					</Route>
+					<Route
+						path="*"
+						element={
+							<p>There&apos;s nothing here!</p>
+						}
+					/>
+				</Routes>
+			</main>
+
 			{cartModal && <Cart></Cart>}
 			{userModal && <User></User>}
 		</>
