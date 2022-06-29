@@ -54,7 +54,7 @@ export const Header = () => {
 			<Wrapper as="header" className={[styles.header, buttonClasses].join(' ')}>
 				<Wrapper as='div' className={styles['header__action-wrapper-left']}>
 					{(pathname !== '/') && <Button variant='icon' modifier='is-no-border' onClick={handleClickBack}>
-						<FontAwesomeIcon icon={faArrowLeft} />
+						<FontAwesomeIcon icon={faArrowLeft} color={'white'}/>
 					</Button>}
 					<Button as='link' to={'/'}>
 						<h1 className={styles.headline}>Food app</h1>
