@@ -3,26 +3,25 @@
 	background-color: coral;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 	display: flex;
-	height: 5rem;
 	justify-content: space-between;
-	left: 0;
 	padding: 0 2rem;
-	position: fixed;
-	right: 0;
-	top: 0;
-	z-index: 10;
 
 	button:first-of-type {
 		display: flex;
 		align-items: center;
 		margin-right: 1rem;
+
+		> svg {
+			width: 25px;
+			height: 25px;
+		}
 	}
 
 	button:hover .badge,
 	button:active .badge {
 		background-color: #92320c;
 	}
-	
+
 	.headline {
 		color: white;
 		font-size: 1.5rem;
