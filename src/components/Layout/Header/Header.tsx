@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+
+// font awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping, faBars } from '@fortawesome/free-solid-svg-icons'
+import { faCartShopping, faBars, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 // styles
-import headerStyles from './Header.module.scss'
+import styles from './Header.module.scss'
 
 // components
 import { Button } from '../../UI/Button/Button'
@@ -16,7 +19,6 @@ import { UserContext } from '../../../context/User/user-context'
 export const Header = () => {
 	// state
 	const [isBtnHighlighted, setBtnHighlighted] = useState<boolean>(false)
-
 	// contexts
 	const { openCartModal, totalPrice, totalItems, cartItems } = useContext(CartContext)
 	const { openModal } = useContext(UserContext)
@@ -37,25 +39,41 @@ export const Header = () => {
 		}
 	}, [cartItems])
 
-	const buttonClasses = `${isBtnHighlighted ? headerStyles.bump : ''}`
+	const buttonClasses = `${isBtnHighlighted ? styles.bump : ''}`
+
+	// use location to show the back button
+	const { pathname } = useLocation()
+
+	const navigate = useNavigate()
+	const handleClickBack = () => {
+		navigate(-1)
+	}
 
 	return (
 		<>
-			<Wrapper as="header" className={[headerStyles.header, buttonClasses].join(' ')}>
-				<Button as='link' to={'/'}>
-					<h1 className={headerStyles.headline}>Food app</h1>
-				</Button>
-				<Button onClick={openCartModal} variant='primary'>
-					<span className={headerStyles.icon}>
-						<FontAwesomeIcon icon={faCartShopping} />
-					</span>
-					<span>Your cart</span>
-					<span className={headerStyles.badge}>{totalItems}</span>
-					<span className={headerStyles.price}>{`${totalPrice.toFixed(2)} €`}</span>
-				</Button>
-				<Button onClick={openModal} variant='icon' modifier='is-no-border'>
-					<FontAwesomeIcon icon={faBars} />
-				</Button>
+			<Wrapper as="header" className={[styles.header, buttonClasses].join(' ')}>
+				<Wrapper as='div' className={styles['header__action-wrapper-left']}>
+					{(pathname !== '/') && <Button variant='icon' modifier='is-no-border' onClick={handleClickBack}>
+						<FontAwesomeIcon icon={faArrowLeft} />
+					</Button>}
+					<Button as='link' to={'/'}>
+						<h1 className={styles.headline}>Food app</h1>
+					</Button>
+				</ Wrapper>
+
+				<Wrapper as='div' className={styles['header__action-wrapper-right']}>
+					<Button onClick={openCartModal} variant='primary'>
+						<span className={styles.icon}>
+							<FontAwesomeIcon icon={faCartShopping} />
+						</span>
+						<span>Your cart</span>
+						<span className={styles.badge}>{totalItems}</span>
+						<span className={styles.price}>{`${totalPrice.toFixed(2)} €`}</span>
+					</Button>
+					<Button onClick={openModal} variant='icon' modifier='is-no-border'>
+						<FontAwesomeIcon icon={faBars} />
+					</Button>
+				</Wrapper>
 			</Wrapper>
 		</>
 	)
