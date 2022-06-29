@@ -5,7 +5,7 @@ import type { LinkProps } from 'react-router-dom'
 import styles from './Button.module.scss'
 
 type BaseProps = {
-	children: React.ReactNode
+	children?: React.ReactNode
 	className?: string
 	variant?: 'primary' | 'secondary' | 'icon' | 'simple'
 	modifier?: string,
