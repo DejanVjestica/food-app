@@ -1,14 +1,15 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 // components
-import { Wrapper } from '../Helpers/Wrapper/Wrapper'
-import { Img } from '../UI/Img/Img'
-import { ListItem } from '../UI/ListItem/ListItem'
-import { Button } from '../UI/Button/Button'
 import { Spinner } from '../UI/Spinner/Spinner'
+import { RestaurantsItem } from './RestaurantsItem'
 
 // styles
 import styles from './Restaurants.module.scss'
+
+// types
+import { RestaurantType } from '../../types/restaurant.types'
 
 // firebase
 import { getDatabase, ref as databaseRef } from 'firebase/database'
@@ -16,14 +17,14 @@ import { getStorage, ref as storageRef, getDownloadURL } from 'firebase/storage'
 import { useList } from 'react-firebase-hooks/database'
 
 export const Restaurants = () => {
-	const dbRef = databaseRef(getDatabase(), 'restaurants')
+	const dbRef = databaseRef(getDatabase(), 'restaurants/info/shops')
 	const storage = getStorage()
 
 	// state
-	const [snapshots, loading, error] = useList(dbRef)
+	const [snapshots, loading] = useList(dbRef)
 	const restaurantsList = snapshots?.map(snapshot => snapshot.val())
 
-	const restaurants = restaurantsList?.map((restaurant) => {
+	const restaurants = restaurantsList?.map((restaurant: RestaurantType, index) => {
 		const imagePath = `restaurants/${restaurant.cover}`
 
 		const getImageUrl: () => void = () => {
@@ -35,21 +36,18 @@ export const Restaurants = () => {
 		getImageUrl()
 
 		return (
-			<ListItem className={styles['restaurant-item']} key={restaurant.name}>
-				<Img id={restaurant.name} alt={restaurant.name} />
-				<Wrapper as="div" >
-					<h3>{restaurant.name}</h3>
-					<p>{restaurant.shortDesription}</p>
-				</Wrapper>
-			</ListItem>
+			<RestaurantsItem key={index} restaurant={restaurant} id={index}></RestaurantsItem>
 		)
 	})
+
 	return (
-		<div className={styles.restaurants}>
+		<article className={styles.restaurants}>
 			{loading && <Spinner></Spinner>}
-			{!loading && restaurants && <ul className={styles['restaurants-list']}>
+			{!loading && restaurants && <h4>Order from {restaurants.length} restaurants</h4>}
+			{!loading && restaurants && <ul className={styles.restaurants__list}>
 				{restaurants}
 			</ul>}
-		</div>
+			<Outlet />
+		</article>
 	)
 }
