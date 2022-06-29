@@ -20,7 +20,7 @@ export const Welcome = () => {
 	const cover: SrcSetItem[] = snapshot?.val()
 
 	return (
-		<div className={styles.welcome}>
+		<article className={styles.welcome}>
 			<div className={styles.welcome__info}>
 				<h1>Welcome to best food portal</h1>
 				<Button as="link" to="/restaurants" variant='primary'>
@@ -28,6 +28,6 @@ export const Welcome = () => {
 				</Button>
 			</div>
 			<Stage data={cover}></Stage>
-		</div>
+		</article>
 	)
 }
