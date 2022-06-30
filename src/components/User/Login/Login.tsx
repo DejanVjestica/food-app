@@ -119,7 +119,7 @@ export const Login = () => {
 				<Img src={googleLogo}></Img>
 				<span>Login with google</span>
 			</Button>
-			<Form onSubmit={onSubmitHandler}>
+			<Form hasError={emailHasError || passwordHasError} onSubmit={onSubmitHandler} >
 				<Input ref={emailRef} type='email' placeholder='Email' label='Email' id='email' useInputConfig={configEmail} retrieveValues={useInputEmailData}/>
 				<Input ref={passwordRef} type='password' placeholder='Password' label='Password' id='password' useInputConfig={configPassword} retrieveValues={useInputPasswordData}/>
 				<Button variant='primary'>Login</Button>

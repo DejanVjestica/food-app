@@ -129,7 +129,7 @@ export const Register = () => {
 				<Img src={googleLogo}></Img>
 				<span>Register with google</span>
 			</Button>
-			<Form onSubmit={onSubmitHandler}>
+			<Form hasError={nameHasError || emailHasError || passwordHasError} onSubmit={onSubmitHandler}>
 				<Input ref={nameRef} key={'Name'} type='text' placeholder='Name' label='Name' id='Name' useInputConfig={configName} retrieveValues={useInputNameData}/>
 				<Input ref={emailRef} key={'Email'}type='email' placeholder='Email' label='Email' id='email' useInputConfig={configEmail} retrieveValues={useInputEmailData}/>
 				<Input ref={passwordRef} key={'Password'} type='password' placeholder='Password' label='Password' id='password' useInputConfig={configPassword} retrieveValues={useInputPasswordData}/>

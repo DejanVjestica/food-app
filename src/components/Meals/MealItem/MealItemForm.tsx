@@ -7,9 +7,7 @@ import { faAdd } from '@fortawesome/free-solid-svg-icons'
 // components
 import { Button } from '../../UI/Button/Button'
 import { Input } from '../../UI/Input/Input'
-
-// styles
-import styles from './MealItemForm.module.scss'
+import { Form } from '../../UI/Form/Form'
 
 // context
 import { CartContext } from '../../../context/Cart/cart-context'
@@ -64,10 +62,8 @@ export const MealItemForm = ({ item }: MealItemFormProps) => {
 		resetUseInputState()
 	}
 
-	const disableSubmitButton = hasError ? styles.disabled : ''
-
 	return (
-		<form className={[styles.form, disableSubmitButton].join(' ')} onSubmit={submitHandler}>
+		<Form hasError={hasError} onSubmit={submitHandler}>
 			<Input
 				type="number"
 				step="1"
@@ -79,6 +75,6 @@ export const MealItemForm = ({ item }: MealItemFormProps) => {
 			<Button type="submit" variant='icon'>
 				<FontAwesomeIcon icon={faAdd} />
 			</Button>
-		</form>
+		</Form>
 	)
 }
