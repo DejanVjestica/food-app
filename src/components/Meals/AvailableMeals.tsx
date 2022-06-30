@@ -30,7 +30,7 @@ export const AvailableMeals = () => {
 		const menuItems = menu.map((meal: MealItemType, index) => {
 			const newMeal = {
 				...meal,
-				id: parseInt(id as string)
+				id: Math.floor(Math.random() * Date.now())
 			}
 			return <MealItem key={index} meal={newMeal} />
 		})
