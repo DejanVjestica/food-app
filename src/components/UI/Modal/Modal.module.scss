@@ -22,6 +22,12 @@
 	max-height: 30rem;
 	overflow: scroll;
 	position: relative;
+	
+	> button {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+	}
 }
 
 @media (min-width: 768px) {

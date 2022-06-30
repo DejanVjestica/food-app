@@ -6,10 +6,6 @@ import styles from './User.module.scss'
 // Contexts
 import { UserContext } from '../../context/User/user-context'
 
-// Fontawesome
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClose } from '@fortawesome/free-solid-svg-icons'
-
 // Components
 import { Login } from './Login/Login'
 import { Register } from './Register/Register'
@@ -28,11 +24,8 @@ export const User = () => {
 	// Context
 	const { isLoginOpen, isRegisterOpen, openLogin, openRegister, closeModal } = useContext(UserContext)
 
-	return <Modal element='#user-modal-root'>
+	return <Modal closeModal={closeModal} element='#user-modal-root'>
 		<div className={styles.wrapper}>
-			<Button variant='icon' onClick={closeModal} >
-				<span className={styles['cancel-icon']}><FontAwesomeIcon icon={faClose} /></span>
-			</Button>
 			{!user && <>
 				{!isLoginOpen && !isRegisterOpen && <h2>Mein Account</h2>}
 				{!isLoginOpen && !isRegisterOpen && <div className={styles.controls}>
