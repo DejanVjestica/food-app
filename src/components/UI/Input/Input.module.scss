@@ -33,6 +33,10 @@
 		font-size: 0.8rem;
 		margin-bottom: 1rem;
 		margin-top: 0;
+
+		> svg {
+			margin-right: 0.5rem;
+		}
 	}
 
 	input + .error {

@@ -1,6 +1,10 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState, forwardRef } from 'react'
 
+// fontawesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faWarning } from '@fortawesome/free-solid-svg-icons'
+
 // custom hooks
 import { useInput } from '../../../hooks/use-input'
 
@@ -32,7 +36,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps
 		onChangeHandler,
 		onBlurHandler,
 		resetState
-
 	} = useInput(useInputConfig as UseInputConfigType)
 
 	// Effects
@@ -49,7 +52,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps
 		<div className={styles.input__wrapper}>
 			{label && <label htmlFor={newProps.id}>{label}</label>}
 			<input ref={ref} {...newProps} onChange={onChangeHandler} onBlur={onBlurHandler} value={value} />
-			{hasError && <p className={styles.error}>{errorText}</p>}
+			{hasError && <p className={styles.error}>
+				<FontAwesomeIcon icon={faWarning} />
+				{errorText}
+			</p>}
 		</div>
 	)
 })
