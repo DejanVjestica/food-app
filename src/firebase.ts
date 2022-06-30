@@ -16,6 +16,9 @@ import {
 import { getFirestore } from 'firebase/firestore'
 import { getDatabase, ref, set } from 'firebase/database'
 
+// types
+import { MealItemType } from './types/cart.types'
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 // const firebaseApiKey = process.env.REACT_APP_FIREBASE_API_KEY
 
@@ -103,4 +106,35 @@ const logout = () => {
 	signOut(auth)
 }
 
-export { auth, db, signInWithGoogle, logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, onAuthStateChanged, logout }
+type OrderType = {
+	streetName: string
+	hausNumber: string
+	name: string
+	email: string
+	phone: string
+	order: MealItemType[]
+}
+
+const writeOrder = async (order: OrderType) => {
+	const db = getDatabase()
+	const auth = getAuth()
+	const user: string = auth.currentUser?.uid || ''
+	const randomId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+	const path = user ? `orders/${user}` : `orders/${randomId}`
+
+	try {
+		await set(ref(db, path), {
+			streetName: order.streetName,
+			hausNumber: order.hausNumber,
+			name: order.name,
+			email: order.email,
+			telefon: order.phone,
+			order: order.order
+		})
+	} catch (err: any) {
+		console.error(err)
+		alert(err.message)
+	}
+}
+
+export { auth, db, signInWithGoogle, logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, onAuthStateChanged, logout, writeOrder }
