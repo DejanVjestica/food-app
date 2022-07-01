@@ -123,7 +123,6 @@ export const CartOrderForm = () => {
 	// Submit form
 	const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
-
 		if (streetHasError || hausNumberHasError || nameHasError || emailHasError || telefonHasError) {
 			setFormHasError(true)
 			return
@@ -138,7 +137,6 @@ export const CartOrderForm = () => {
 			email: emailRef.current?.value as string,
 			phone: telefonRef.current?.value as string,
 			order: cartItems
-
 		})
 
 		// reset all inputs
@@ -149,6 +147,10 @@ export const CartOrderForm = () => {
 		resetUseInputTelefonState()
 
 		closeCartModal()
+		clearCart()
+	}
+
+	const onClearCartHandler = () => {
 		clearCart()
 	}
 
@@ -186,11 +188,14 @@ export const CartOrderForm = () => {
 			<fieldset>
 				<legend>Payment</legend>
 				<label htmlFor="paymentMethod">Payment method</label>
-				<select id="paymentMethod" name="paymentMethod">
+				{/* <select id="paymentMethod" name="paymentMethod">
 					<option value="creditCard">Credit Card</option>
 					<option value="paypal">PayPal</option>
-				</select>
+				</select> */}
 			</fieldset>
+			<Button variant='secondary' onClick={onClearCartHandler} >
+				clear cart
+			</Button>
 			<Button variant='primary' type="submit">
 				Order {`${totalPrice.toFixed(2)} €`}
 			</Button>
