@@ -29,26 +29,28 @@ export const Cart = () => {
 
 	return (
 		<Modal closeModal={closeCartModal} element={'#cart-modal-root'}>
-			{!hasItems && <p>Please fill up the Cart</p>}
+			<Wrapper as="div" className={styles.cart__content}>
+				{!hasItems && <p>Please fill up the Cart</p>}
 
-			<ul className={styles.cart__items}>{orderItems}</ul>
+				<ul className={styles.cart__items}>{orderItems}</ul>
 
-			{hasItems && (
-				<p className={styles.cart__total}>
-					<span>Total amount</span>
-					<span>{`${totalPrice.toFixed(2)} €`}</span>
-				</p>
-			)}
+				{hasItems && (
+					<p className={styles.cart__total}>
+						<span>Total amount</span>
+						<span>{`${totalPrice.toFixed(2)} €`}</span>
+					</p>
+				)}
 
-			{openOrderForm && hasItems && <CartOrderForm />}
+				{openOrderForm && hasItems && <CartOrderForm />}
+			</Wrapper>
 
-			<Wrapper as="div" className={styles.cart__actions}>
+			{!openOrderForm && <Wrapper as="div" className={styles.cart__actions}>
 				{hasItems && <Button onClick={clearCart} variant='secondary'>Clear Cart</Button>}
 				<Button onClick={closeCartModal} variant='secondary'>
 					Close
 				</Button>
 				{hasItems && !openOrderForm && <Button variant='primary' onClick={onClickOrderHandler}>Order</Button>}
-			</Wrapper>
+			</Wrapper>}
 		</Modal>
 	)
 }

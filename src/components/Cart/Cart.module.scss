@@ -12,10 +12,33 @@
 	font-size: 1.5rem;
 	margin: 1rem 0;
 }
+.cart__content {
+	> form {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		
+		> fieldset {
+			flex: 100%;
+			border: none;
+			margin: 0;
+			padding: 0 0 3rem;
+		
+			legend {
+				font-size: 1rem;
+				font-weight: bold;
+				margin-bottom: 1rem;
+			}
+			
+		}
+		& + button {
+			margin: 0 auto;
+		}
+	}
+}
 
+.cart__content,
 .cart__actions {
-	text-align: right;
-
 	button {
 		margin-right: 1rem;
 
@@ -25,3 +48,6 @@
 	}
 }
 
+.cart__actions {
+	text-align: right;
+}
