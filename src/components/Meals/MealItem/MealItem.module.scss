@@ -3,6 +3,7 @@
 	margin: 1rem;
 	padding-bottom: 1rem;
 	border-bottom: 1px solid #ccc;
+	align-items: center;
 	
 	h3 {
 		margin: 0 0 0.25rem 0;
@@ -11,13 +12,15 @@
 	> form {
 		display: flex;
 		flex-wrap: wrap;
-		align-items: baseline;
-	
+		position: relative;
+		
 		div {
+			> input {
+				margin: 0;
+			}
 			p {
-				margin-bottom: 0.5rem;
 				position: absolute;
-				bottom: -20px;
+				bottom: -40px;
 				width: max-content;
 			}
 		}

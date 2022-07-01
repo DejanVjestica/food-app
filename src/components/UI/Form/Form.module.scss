@@ -1,6 +1,6 @@
 .form {
 	&.disabled {
-		> button {
+		> button:last-of-type {
 			opacity: 0.5;
 			cursor: not-allowed;
 		}
