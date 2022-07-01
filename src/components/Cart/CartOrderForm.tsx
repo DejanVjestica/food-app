@@ -1,5 +1,5 @@
 /* eslint-disable no-tabs */
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 
 // firebase
 import { writeOrder } from '../../firebase'
@@ -32,7 +32,16 @@ export const CartOrderForm = () => {
 	const [nameHasError, setNameHasError] = useState(true)
 	const [emailHasError, setEmailHasError] = useState(true)
 	const [telefonHasError, setTelefonHasError] = useState(true)
-	const [formHasError, setFormHasError] = useState(false)
+	const [formHasError, setFormHasError] = useState(true)
+
+	// Effects
+	useEffect(() => {
+		const hasError = streetHasError || hausNumberHasError || nameHasError || emailHasError || telefonHasError
+		const fielsAreFilled = streetRef.current?.value && hausNummerRef.current?.value && nameRef.current?.value && emailRef.current?.value && telefonRef.current?.value
+
+		setFormHasError(hasError || !fielsAreFilled)
+	}
+	, [formHasError, streetHasError, hausNumberHasError, nameHasError, emailHasError, telefonHasError])
 
 	// Street name input config, and dataHandler
 	const streetValidationHandler = (value: string) => value.trim() !== ''
@@ -123,11 +132,8 @@ export const CartOrderForm = () => {
 	// Submit form
 	const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
-		if (streetHasError || hausNumberHasError || nameHasError || emailHasError || telefonHasError) {
-			setFormHasError(true)
-			return
-		}
-		setFormHasError(false)
+
+		if (formHasError) return
 
 		// send order to firebase
 		writeOrder({
@@ -153,9 +159,8 @@ export const CartOrderForm = () => {
 	const onClearCartHandler = () => {
 		clearCart()
 	}
-
 	return (
-		<Form hasError={streetHasError || hausNumberHasError || nameHasError || emailHasError || telefonHasError} onSubmit={onSubmitHandler}>
+		<Form hasError={formHasError} onSubmit={onSubmitHandler}>
 			<fieldset>
 				<legend>Deliveri Address</legend>
 				<Input
