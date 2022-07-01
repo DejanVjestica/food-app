@@ -36,7 +36,7 @@ const removeItemFromCartHandler = (itemToRemove: MealItemExtendedType, state: Ca
 	const existingCartItem = state.cartItems[existingCartItemIndex]
 
 	if (existingCartItem.quantity === 1) {
-		const updatedItems = state.cartItems.filter((item) => item.quantity > 1)
+		const updatedItems = state.cartItems.filter((item) => item !== existingCartItem)
 		return [...updatedItems]
 	} else {
 		const updatedItem = {
