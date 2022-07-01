@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 
 // components
 import { MealItem } from './MealItem/MealItem'
+import { Layout } from '../Helpers/Layout/Layout'
 
 // styles
 import styles from './AvailableMeals.module.scss'
@@ -39,8 +40,10 @@ export const AvailableMeals = () => {
 	, [snapshot])
 
 	return (
-		<article className={styles['available-meals']}>
-			<ul className={styles['available-meals__list']}>{meals}</ul>
-		</article>
+		<Layout>
+			<article className={styles['available-meals']}>
+				<ul className={styles['available-meals__list']}>{meals}</ul>
+			</article>
+		</Layout>
 	)
 }

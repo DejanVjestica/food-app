@@ -2,7 +2,8 @@ import React from 'react'
 
 // components
 import { Button } from '../UI/Button/Button'
-import { Stage } from '../Layout/Stage/Stage'
+import { Stage } from '../LayoutElements/Stage/Stage'
+import { Layout } from '../Helpers/Layout/Layout'
 
 // firebase
 import { getDatabase, ref as databaseRef } from 'firebase/database'
@@ -20,14 +21,16 @@ export const Welcome = () => {
 	const cover: SrcSetItem[] = snapshot?.val()
 
 	return (
-		<article className={styles.welcome}>
-			<div className={styles.welcome__info}>
-				<h1>Welcome to best food portal</h1>
-				<Button as="link" to="/restaurants" variant='primary'>
-					<span>Please check our restaurants</span>
-				</Button>
-			</div>
-			<Stage data={cover}></Stage>
-		</article>
+		<Layout>
+			<article className={styles.welcome}>
+				<div className={styles.welcome__info}>
+					<h1>Welcome to best food portal</h1>
+					<Button as="link" to="/restaurants" variant='primary'>
+						<span>Please check our restaurants</span>
+					</Button>
+				</div>
+				<Stage data={cover}></Stage>
+			</article>
+		</Layout>
 	)
 }

@@ -1,0 +1,27 @@
+.default {
+	width: 100%;
+	padding-top: 5rem;
+}
+
+.sidebarLeft {
+	display: flex;
+
+	> aside {
+		background-color: #3f3f3f;
+		height: calc(100vh - 5rem);
+		left: 0;
+		overflow: scroll;
+		position: fixed;
+		width: 25vw;
+		color: #e5e5e5;
+		padding: 1rem;
+	}
+	
+	> article {
+		width: 75vw;
+		margin-left: auto;
+	}
+}
+
+.sidebarRight {
+}

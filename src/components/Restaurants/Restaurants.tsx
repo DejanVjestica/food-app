@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom'
 // components
 import { Spinner } from '../UI/Spinner/Spinner'
 import { RestaurantsItem } from './RestaurantsItem'
+import { Layout } from '../Helpers/Layout/Layout'
 
 // styles
 import styles from './Restaurants.module.scss'
@@ -41,13 +42,16 @@ export const Restaurants = () => {
 	})
 
 	return (
-		<article className={styles.restaurants}>
-			{loading && <Spinner></Spinner>}
-			{!loading && restaurants && <h4>Order from {restaurants.length} restaurants</h4>}
-			{!loading && restaurants && <ul className={styles.restaurants__list}>
-				{restaurants}
-			</ul>}
-			<Outlet />
-		</article>
+		<Layout variant='sidebarLeft'>
+			<aside className={styles.sidebar}>Here comes sidebar</aside>
+			<article className={styles.restaurants}>
+				{loading && <Spinner></Spinner>}
+				{!loading && restaurants && <h4>Order from {restaurants.length} restaurants</h4>}
+				{!loading && restaurants && <ul className={styles.restaurants__list}>
+					{restaurants}
+				</ul>}
+				<Outlet />
+			</article>
+		</ Layout>
 	)
 }

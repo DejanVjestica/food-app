@@ -7,11 +7,8 @@ import { User } from './components/User/User'
 import { Restaurants } from './components/Restaurants/Restaurants'
 import { Welcome } from './components/Welcome/Welcome'
 import { UploadData } from './components/UploadData/UploadData'
-import { Header } from './components/Layout/Header/Header'
+import { Header } from './components/LayoutElements/Header/Header'
 import { AvailableMeals } from './components/Meals/AvailableMeals'
-
-// Styles
-import styles from './App.module.scss'
 
 // Contexts
 import { CartContext } from './context/Cart/cart-context'
@@ -24,24 +21,21 @@ export const App = () => {
 	return (
 		<>
 			<Header />
-			<aside className={styles.sidebar}>Here comes sidebar</aside>
-			<main className={styles.main}>
-				{/* <UploadData /> */}
-				<Routes>
-					<Route path="/" element={<Welcome />} />
-					<Route path="restaurants" element={<Outlet />}>
-						<Route index element={<Restaurants />} />
-						<Route path=":id" element={<AvailableMeals />} />
+			{/* <UploadData /> */}
+			<Routes>
+				<Route path="/" element={<Welcome />} />
+				<Route path="restaurants" element={<Outlet />}>
+					<Route index element={<Restaurants />} />
+					<Route path=":id" element={<AvailableMeals />} />
 
-					</Route>
-					<Route
-						path="*"
-						element={
-							<p>There&apos;s nothing here!</p>
-						}
-					/>
-				</Routes>
-			</main>
+				</Route>
+				<Route
+					path="*"
+					element={
+						<p>There&apos;s nothing here!</p>
+					}
+				/>
+			</Routes>
 
 			{cartModal && <Cart></Cart>}
 			{userModal && <User></User>}
