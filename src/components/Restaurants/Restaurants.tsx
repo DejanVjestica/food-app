@@ -5,6 +5,7 @@ import { Outlet } from 'react-router-dom'
 import { Spinner } from '../UI/Spinner/Spinner'
 import { RestaurantsItem } from './RestaurantsItem'
 import { Layout } from '../Helpers/Layout/Layout'
+import { Sidebar } from '../LayoutElements/Sidebar/Sidebar'
 
 // styles
 import styles from './Restaurants.module.scss'
@@ -43,11 +44,11 @@ export const Restaurants = () => {
 
 	return (
 		<Layout variant='sidebarLeft'>
-			<aside className={styles.sidebar}>Here comes sidebar</aside>
+			<Sidebar restaurantsList={restaurantsList} />
 			<article className={styles.restaurants}>
 				{loading && <Spinner></Spinner>}
-				{!loading && restaurants && <h4>Order from {restaurants.length} restaurants</h4>}
-				{!loading && restaurants && <ul className={styles.restaurants__list}>
+
+				{!loading && restaurantsList && <ul className={styles.restaurants__list}>
 					{restaurants}
 				</ul>}
 				<Outlet />
