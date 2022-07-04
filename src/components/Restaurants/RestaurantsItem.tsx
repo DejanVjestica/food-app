@@ -22,13 +22,16 @@ type RestaurantsItemProps = {
 }
 
 export const RestaurantsItem = ({ restaurant, id }: RestaurantsItemProps) => {
+	const tags = restaurant.tags.map((tag, index) => {
+		return <span key={index}>{tag}</span>
+	})
 	return (
 		<li className={styles.restaurant__item}>
 			<Img id={restaurant.name} alt={restaurant.name} />
 			<Wrapper as="div" >
 				<h3 className={styles.restaurant__name}>{restaurant.name}</h3>
 				<p className={styles.restaurant__desc}>{restaurant.description}</p>
-				<Tags variant='primary' tags={restaurant.tags}></Tags>
+				<p className={styles.restaurant__tags}>{tags}</p>
 				<Wrapper as='aside'>
 					<ul className={styles.restaurant__info}>
 						<ListItem>
