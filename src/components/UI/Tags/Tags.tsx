@@ -1,22 +1,37 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+
+// context
+import { FirestoreContext } from '../../../context/Firestore/firestore-context'
 
 // components
 import { ListItem } from '../ListItem/ListItem'
+import { TagButton } from './TagButton'
 
 // stiles
 import styles from './Tags.module.scss'
 
 type TagsProps = {
-	variant?: 'primary' | 'secondary'
-	modifier?: string
-	tags: string[]
+	variant?: 'sidebar'
 }
 
-export const Tags = ({ tags, variant, modifier }: TagsProps) => {
-	const className = [styles.default, styles[`${variant}`], styles[`${modifier}`]].join(' ')
+export const Tags = ({ variant }: TagsProps) => {
+	// Context
+	const { tagList, selectedTag, setTagsForFiltering } = useContext(FirestoreContext)
 
-	const tagsListItems = tags.map((tag, index) => {
-		return <ListItem key={index}>{tag}</ListItem>
+	const onClickHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+		setTagsForFiltering(event.currentTarget.innerText)
+	}
+
+	const className = [styles.default, styles[`${variant}`]].join(' ')
+
+	const tagsListItems = tagList.map((tag, index) => {
+		const isActive = selectedTag.includes(tag)
+
+		return <ListItem key={index}>
+			<TagButton onClick={onClickHandler} key={tag} active={isActive} >
+				{tag}
+			</TagButton>
+		</ListItem>
 	})
 
 	return (
