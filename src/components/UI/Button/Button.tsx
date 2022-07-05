@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import type { LinkProps } from 'react-router-dom'
 
@@ -12,24 +12,21 @@ type BaseProps = {
 }
 
 type ButtonAsButton = BaseProps &
-  Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseProps> & {
-    as?: 'button'
-  }
+	Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseProps> & {
+		as?: 'button'
+	}
 
 type ButtonAsLink = BaseProps &
-  Omit<LinkProps, keyof BaseProps> & {
-    as: 'link'
-  }
+	Omit<LinkProps, keyof BaseProps> & {
+		as: 'link'
+	}
 
 type ButtonAsExternal = BaseProps &
-  Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof BaseProps> & {
-    as: 'a'
-  }
+	Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof BaseProps> & {
+		as: 'a'
+	}
 
-type ButtonProps =
-  | ButtonAsButton
-  | ButtonAsExternal
-  | ButtonAsLink
+type ButtonProps = | ButtonAsButton | ButtonAsExternal | ButtonAsLink
 
 export const Button = (props: ButtonProps): JSX.Element => {
 	const className = [styles.default, styles[`${props.variant}`], styles[`${props.modifier}`]].join(' ')
