@@ -7,11 +7,13 @@ Default button styles
 	
 	transition: all 0.3s ease-in-out;
 	border: none;
+	background-color: transparent;
+
+	a {
+		text-decoration: none;
+	}
 }
 
-a {
-	text-decoration: none;
-}
 
 /* ---------------------------------------------------
 Variant: Primary button
