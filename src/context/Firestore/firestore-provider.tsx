@@ -1,9 +1,9 @@
+/* eslint-disable no-tabs */
 import React, { useState, useEffect } from 'react'
 import { FirestoreContext } from './firestore-context'
 
 // firebase
 import firebase from '../../firestoreNew'
-// import { collection, query, where, getDocs } from 'firebase/firestore'
 
 // Types
 import { RestaurantType } from '../../types/restaurant.types'
@@ -20,11 +20,11 @@ export const FirestoreProvider = ({ children }: {children: React.ReactNode}) => 
 	const getAllRestaurants = () => {
 		setLoading(true)
 		ref.onSnapshot((querySnapshot) => {
-			const items: any = []
+			const items: RestaurantType[] = []
 			const tags: string[] = []
 
 			querySnapshot.forEach((doc) => {
-				items.push(doc.data())
+				items.push(doc.data() as RestaurantType)
 				tags.push(doc.data().tags)
 			})
 
@@ -56,10 +56,10 @@ export const FirestoreProvider = ({ children }: {children: React.ReactNode}) => 
 
 	const filterRestaurantsByTag = () => {
 		ref.where('tags', 'array-contains-any', selectedTag).onSnapshot((querySnapshot) => {
-			const items: any = []
+			const items: RestaurantType[] = []
 
 			querySnapshot.forEach((doc) => {
-				items.push(doc.data())
+				items.push(doc.data() as RestaurantType)
 			})
 
 			setRestaurantsList(items)
