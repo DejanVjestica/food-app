@@ -1,0 +1,13 @@
+.tag-button {
+	cursor: pointer;
+	font: inherit;
+	
+	transition: all 0.3s ease-in-out;
+	border: none;
+	background-color: transparent;
+}
+
+.is-active {
+	background-color: coral;
+	color: white;
+}
