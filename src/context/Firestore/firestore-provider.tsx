@@ -17,7 +17,6 @@ export const FirestoreProvider = ({ children }: {children: React.ReactNode}) => 
 
 	const ref = firebase.firestore().collection('restaurants')
 
-	// REALTIME GET FUNCTION
 	const getAllRestaurants = () => {
 		setLoading(true)
 		ref.onSnapshot((querySnapshot) => {
@@ -43,12 +42,15 @@ export const FirestoreProvider = ({ children }: {children: React.ReactNode}) => 
 		getAllRestaurants()
 	}, [])
 
-	const setTagsForFiltering = (tag: string) => {
+	const setTagsForFiltering = (tag?: string) => {
 		setSelectedTag((prevState) => {
-			if (prevState.includes(tag)) {
+			if (!tag) {
+				return []
+			} else if (prevState.includes(tag)) {
 				return prevState.filter((item) => item !== tag)
+			} else {
+				return [...prevState, tag]
 			}
-			return [...prevState, tag]
 		})
 	}
 
@@ -80,8 +82,8 @@ export const FirestoreProvider = ({ children }: {children: React.ReactNode}) => 
 				restaurantsList,
 				tagList,
 				loading,
-				setTagsForFiltering,
-				getAllRestaurants
+				selectedTag,
+				setTagsForFiltering
 			}}>
 			{children}
 		</FirestoreContext.Provider>
