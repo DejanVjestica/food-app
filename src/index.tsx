@@ -14,6 +14,7 @@ import './index.scss'
 import { SrcSetProvider } from './context/srcSet/srcSet-provider'
 import { CartProvider } from './context/Cart/cart-provider'
 import { UserProvider } from './context/User/user-provider'
+import { FirestoreProvider } from './context/Firestore/firestore-provider'
 // cookies
 import { CookiesProvider } from 'react-cookie'
 
@@ -22,15 +23,17 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<CartProvider>
-				<SrcSetProvider>
-					<CookiesProvider>
-						<UserProvider>
-							<App />
-						</UserProvider>
-					</CookiesProvider>
-				</SrcSetProvider>
-			</CartProvider>
+			<FirestoreProvider>
+				<CartProvider>
+					<SrcSetProvider>
+						<CookiesProvider>
+							<UserProvider>
+								<App />
+							</UserProvider>
+						</CookiesProvider>
+					</SrcSetProvider>
+				</CartProvider>
+			</FirestoreProvider>
 		</BrowserRouter>
 	</React.StrictMode>
 )
