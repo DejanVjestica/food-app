@@ -223,3 +223,86 @@ export const dataRestaurants = {
 		}
 	}
 }
+
+export const german = {
+	name: 'German Restaurant',
+	cover: 'burgers.jpg',
+	description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget consectetur consectetur, nisi nisl consectetur nisi, euismod nisl nisi euismod nisl.',
+	address: '123 Main St',
+	phone: '123-456-7890',
+	website: 'https://www.google.com',
+	hours: '10:00 AM - 10:00 PM',
+	price: '$',
+	rating: '4.5',
+	reviews: '100',
+	tags: ['Burgers', 'German', 'German Food']
+
+}
+
+export const germanMenu = [
+	{
+		name: 'Handgemachte Käsespätzle (vegetarisch)',
+		price: 11,
+		image: {
+			src: 'https://via.placeholder.com/200x200',
+			alt: 'Nudeln',
+			srcSet: [
+				{ src: 'https://via.placeholder.com/200x200', imageWidth: '200w' },
+				{ src: 'https://via.placeholder.com/400x400', imageWidth: '400w' }
+			]
+		},
+		description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+	},
+	{
+		name: 'Königsberger Klopse',
+		price: 15,
+		image: {
+			src: 'https://via.placeholder.com/200x200',
+			alt: 'Sup Tom Kha Gai',
+			srcSet: [
+				{ src: 'https://via.placeholder.com/200x200', imageWidth: '200w' },
+				{ src: 'https://via.placeholder.com/400x400', imageWidth: '400w' }
+			]
+		},
+		description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+	},
+	{
+		name: 'Handgemachte Käsespätzle',
+		price: 20,
+		image: {
+			src: 'https://via.placeholder.com/200x200',
+			alt: 'Com Sot Lac',
+			srcSet: [
+				{ src: 'https://via.placeholder.com/200x200', imageWidth: '200w' },
+				{ src: 'https://via.placeholder.com/400x400', imageWidth: '400w' }
+			]
+		},
+		description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+	},
+	{
+		name: 'Bacon Burger',
+		price: 20,
+		image: {
+			src: 'https://via.placeholder.com/200x200',
+			alt: 'Com Sot Lac',
+			srcSet: [
+				{ src: 'https://via.placeholder.com/200x200', imageWidth: '200w' },
+				{ src: 'https://via.placeholder.com/400x400', imageWidth: '400w' }
+			]
+		},
+		description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+	},
+	{
+		name: 'Gebackene Tornado-Kartoffeln',
+		price: 20,
+		image: {
+			src: 'https://via.placeholder.com/200x200',
+			alt: 'Com Sot Lac',
+			srcSet: [
+				{ src: 'https://via.placeholder.com/200x200', imageWidth: '200w' },
+				{ src: 'https://via.placeholder.com/400x400', imageWidth: '400w' }
+			]
+		},
+		description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+	}
+]

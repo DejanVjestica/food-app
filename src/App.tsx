@@ -8,6 +8,7 @@ import { Restaurants } from './components/Restaurants/Restaurants'
 import { Welcome } from './components/Welcome/Welcome'
 import { Header } from './components/LayoutElements/Header/Header'
 import { AvailableMeals } from './components/Meals/AvailableMeals'
+import { UploadData } from './components/UploadData/UploadData'
 
 // Contexts
 import { CartContext } from './context/Cart/cart-context'
@@ -22,6 +23,7 @@ export const App = () => {
 			<Header />
 			<Routes>
 				<Route path="/" element={<Welcome />} />
+				<Route path="upload" element={<UploadData />} />
 				<Route path="restaurants" element={<Outlet />}>
 					<Route index element={<Restaurants />} />
 					<Route path=":id" element={<AvailableMeals />} />

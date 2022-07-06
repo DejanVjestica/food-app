@@ -73,6 +73,9 @@ export const Header = () => {
 					<Button onClick={openModal} variant='icon' modifier='is-no-border'>
 						<FontAwesomeIcon icon={faBars} />
 					</Button>
+					<Button as='link' to={'/upload'}>
+						upload
+					</Button>
 				</Wrapper>
 			</Wrapper>
 		</>
