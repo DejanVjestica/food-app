@@ -26,7 +26,7 @@ type RestaurantsItemProps = {
 }
 
 export const RestaurantsItem = ({ restaurant, id }: RestaurantsItemProps) => {
-	const tags = restaurant.tags.map((tag, index) => {
+	const tags = restaurant.tags?.map((tag, index) => {
 		return <span key={index}>{tag}</span>
 	})
 

@@ -1,33 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
+
+import { FirestoreContext } from '../../context/Firestore/firestore-context'
 
 // components
 import { MealItem } from './MealItem/MealItem'
 import { Layout } from '../Helpers/Layout/Layout'
+import { Spinner } from '../UI/Spinner/Spinner'
 
 // styles
 import styles from './AvailableMeals.module.scss'
-
-// firebase
-import { getDatabase, ref as databaseRef } from 'firebase/database'
-import { useObject } from 'react-firebase-hooks/database'
 
 // types
 import { MealItemType } from '../../types/cart.types'
 
 export const AvailableMeals = () => {
-	// get params from url
-	const params = useParams()
-	const id = params.id
-	// get meals from firebase
-	const dbRef = databaseRef(getDatabase(), 'restaurants/info/shops/' + id + '/menu')
-	const [snapshot] = useObject(dbRef)
-	const menu: MealItemType[] = snapshot?.val()
+	// context
+	const { restaurantsList, loading } = useContext(FirestoreContext)
 	// state
 	const [meals, setMeals] = useState<JSX.Element[]>([])
+	// get params from url
+	const params = useParams()
+	const restaurantId = parseInt(params.id as string)
 
 	useEffect(() => {
-		if (!menu) return
+		if (!restaurantsList || !restaurantsList[restaurantId]) return
+
+		const menu = restaurantsList[restaurantId].menu
 		const menuItems = menu.map((meal: MealItemType, index) => {
 			const newMeal = {
 				...meal,
@@ -37,11 +36,12 @@ export const AvailableMeals = () => {
 		})
 		setMeals(menuItems)
 	}
-	, [snapshot])
+	, [restaurantsList])
 
 	return (
 		<Layout>
 			<article className={styles['available-meals']}>
+				{loading && <Spinner></Spinner>}
 				<ul className={styles['available-meals__list']}>{meals}</ul>
 			</article>
 		</Layout>
