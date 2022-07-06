@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { FirestoreContext } from './firestore-context'
 
 // firebase
-import firebase from '../../firestoreNew'
+import { db, collection, getDocs, where, query } from '../../firebase'
 
 // Types
 import { RestaurantType } from '../../types/restaurant.types'
@@ -15,27 +15,26 @@ export const FirestoreProvider = ({ children }: {children: React.ReactNode}) => 
 	const [selectedTag, setSelectedTag] = useState<string[]>([])
 	const [loading, setLoading] = useState<boolean>(false)
 
-	const ref = firebase.firestore().collection('restaurants')
+	const docRef = collection(db, 'restaurants')
 
-	const getAllRestaurants = () => {
+	const getAllRestaurants = async() => {
 		setLoading(true)
-		ref.onSnapshot((querySnapshot) => {
-			const items: RestaurantType[] = []
-			const tags: string[] = []
+		const restaurants = await getDocs(docRef)
+		const items: RestaurantType[] = []
+		const tags: string[] = []
 
-			querySnapshot.forEach((doc) => {
-				items.push(doc.data() as RestaurantType)
-				tags.push(doc.data().tags)
-			})
-
-			setRestaurantsList(items)
-
-			const newArr = tags.flat(1)
-			const uniqArr = [...new Set(newArr)]
-			setTagList(uniqArr)
-
-			setLoading(false)
+		restaurants.forEach((doc) => {
+			items.push(doc.data() as RestaurantType)
+			tags.push(doc.data().tags)
 		})
+
+		setRestaurantsList(items)
+
+		const newArr = tags.flat(1)
+		const uniqArr = [...new Set(newArr)]
+		setTagList(uniqArr)
+
+		setLoading(false)
 	}
 
 	useEffect(() => {
@@ -54,17 +53,17 @@ export const FirestoreProvider = ({ children }: {children: React.ReactNode}) => 
 		})
 	}
 
-	const filterRestaurantsByTag = () => {
-		ref.where('tags', 'array-contains-any', selectedTag).onSnapshot((querySnapshot) => {
-			const items: RestaurantType[] = []
+	const filterRestaurantsByTag = async() => {
+		const tags = await query(docRef, where('tags', 'array-contains-any', selectedTag))
+		const items: RestaurantType[] = []
+		const querySnapshot = await getDocs(tags)
 
-			querySnapshot.forEach((doc) => {
-				items.push(doc.data() as RestaurantType)
-			})
-
-			setRestaurantsList(items)
-			setLoading(false)
+		querySnapshot.forEach((doc) => {
+			items.push(doc.data() as RestaurantType)
 		})
+
+		setRestaurantsList(items)
+		setLoading(false)
 	}
 
 	useEffect(() => {
