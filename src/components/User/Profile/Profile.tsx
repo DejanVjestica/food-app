@@ -1,9 +1,7 @@
 import React from 'react'
 
 // Firebase
-import {
-	User
-} from 'firebase/auth'
+import { User } from 'firebase/auth'
 
 // components
 import { Img } from '../../UI/Img/Img'
