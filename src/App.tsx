@@ -6,7 +6,6 @@ import { Cart } from './components/Cart/Cart'
 import { User } from './components/User/User'
 import { Restaurants } from './components/Restaurants/Restaurants'
 import { Welcome } from './components/Welcome/Welcome'
-import { UploadData } from './components/UploadData/UploadData'
 import { Header } from './components/LayoutElements/Header/Header'
 import { AvailableMeals } from './components/Meals/AvailableMeals'
 
@@ -21,7 +20,6 @@ export const App = () => {
 	return (
 		<>
 			<Header />
-			{/* <UploadData /> */}
 			<Routes>
 				<Route path="/" element={<Welcome />} />
 				<Route path="restaurants" element={<Outlet />}>
