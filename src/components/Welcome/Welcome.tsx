@@ -5,9 +5,9 @@ import { Button } from '../UI/Button/Button'
 import { Stage } from '../LayoutElements/Stage/Stage'
 import { Layout } from '../Helpers/Layout/Layout'
 
-// firebase
-import { getDatabase, ref as databaseRef } from 'firebase/database'
-import { useObject } from 'react-firebase-hooks/database'
+// firestore
+import { getStorage, ref } from 'firebase/storage'
+import { useDownloadURL } from 'react-firebase-hooks/storage'
 
 // types
 import { SrcSetItem } from '../../types/use-srcSet.types'
@@ -15,10 +15,23 @@ import { SrcSetItem } from '../../types/use-srcSet.types'
 // styles
 import styles from './Welcome.module.scss'
 
+type ImgConfigType = {
+	src?: string | undefined
+	srcSet?: SrcSetItem[] | string
+	alt?: string | undefined
+}
+
 export const Welcome = () => {
-	const dbRef = databaseRef(getDatabase(), 'restaurants/info/cover')
-	const [snapshot] = useObject(dbRef)
-	const cover: SrcSetItem[] = snapshot?.val()
+	const storage = getStorage()
+
+	const imagePath = 'restaurantsCover/restaurantsCover.jpg'
+	const [value] = useDownloadURL(ref(storage, imagePath))
+
+	const imgConfig = {
+		src: value,
+		alt: 'Alternative text that describes the image',
+		srcSet: value
+	} as ImgConfigType
 
 	return (
 		<Layout>
@@ -29,7 +42,7 @@ export const Welcome = () => {
 						<span>Please check our restaurants</span>
 					</Button>
 				</div>
-				<Stage data={cover}></Stage>
+				<Stage imgConfig={imgConfig} ></Stage>
 			</article>
 		</Layout>
 	)

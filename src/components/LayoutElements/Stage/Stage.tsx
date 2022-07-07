@@ -11,16 +11,20 @@ import { Wrapper } from '../../Helpers/Wrapper/Wrapper'
 import { SrcSetItem } from '../../../types/use-srcSet.types'
 
 type StageProps = {
-	data: SrcSetItem[]
+	imgConfig: {
+		src?: string | undefined
+		srcSet?: SrcSetItem[] | string
+		alt?: string | undefined
+	}
 }
 
-export const Stage = (props: StageProps) => {
+export const Stage = ({ imgConfig }: StageProps) => {
 	return (
 		<Wrapper className={styles.stage}>
 			<Img
-				src={'https://via.placeholder.com/200x75'}
-				alt="Alternative text that describes the image"
-				srcsetdata={props.data}>
+				src={imgConfig?.src}
+				alt={imgConfig?.alt}
+				srcsetdata={imgConfig?.srcSet}>
 			</Img>
 		</Wrapper>
 	)
