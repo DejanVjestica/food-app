@@ -23,7 +23,7 @@
 	overflow: scroll;
 	position: relative;
 
-	> button {
+	> [title^='close'] {
 		position: absolute;
 		top: 1rem;
 		right: 1rem;
