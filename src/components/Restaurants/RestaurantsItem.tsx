@@ -13,7 +13,6 @@ import { Wrapper } from '../Helpers/Wrapper/Wrapper'
 import { Img } from '../UI/Img/Img'
 import { ListItem } from '../UI/ListItem/ListItem'
 import { Button } from '../UI/Button/Button'
-import { Spinner } from '../UI/Spinner/Spinner'
 
 // styles
 import styles from './RestaurantsItem.module.scss'
@@ -36,7 +35,6 @@ export const RestaurantsItem = ({ restaurant, id }: RestaurantsItemProps) => {
 
 	return (
 		<li className={styles.restaurant__item}>
-			{loading && <Spinner></Spinner>}
 			{error && <p>{error.message}</p>}
 			<Img id={restaurant.name} alt={restaurant.name} src={value} />
 			<Wrapper as="div" >
