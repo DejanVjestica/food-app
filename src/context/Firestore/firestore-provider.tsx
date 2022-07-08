@@ -8,7 +8,7 @@ import { db, collection, getDocs, where, query } from '../../firebase'
 // Types
 import { RestaurantType } from '../../types/restaurant.types'
 
-export const FirestoreProvider = ({ children }: {children: React.ReactNode}) => {
+export const FirestoreProvider = ({ children }: { children: React.ReactNode }) => {
 	// state
 	const [restaurantsList, setRestaurantsList] = useState<RestaurantType[]>([])
 	const [tagList, setTagList] = useState<string[]>([])
@@ -17,7 +17,7 @@ export const FirestoreProvider = ({ children }: {children: React.ReactNode}) => 
 
 	const docRef = collection(db, 'restaurants')
 
-	const getAllRestaurants = async() => {
+	const getAllRestaurants = async () => {
 		setLoading(true)
 		const restaurants = await getDocs(docRef)
 		const items: RestaurantType[] = []
@@ -53,7 +53,7 @@ export const FirestoreProvider = ({ children }: {children: React.ReactNode}) => 
 		})
 	}
 
-	const filterRestaurantsByTag = async() => {
+	const filterRestaurantsByTag = async () => {
 		const tags = await query(docRef, where('tags', 'array-contains-any', selectedTag))
 		const items: RestaurantType[] = []
 		const querySnapshot = await getDocs(tags)

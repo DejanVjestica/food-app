@@ -38,7 +38,7 @@ const db = getFirestore(app)
 
 const googleProvider = new GoogleAuthProvider()
 
-const signInWithGoogle = async() => {
+const signInWithGoogle = async () => {
 	try {
 		await signInWithPopup(auth, googleProvider)
 		const data = {
@@ -59,7 +59,7 @@ const signInWithGoogle = async() => {
 	}
 }
 
-const logInWithEmailAndPassword = async(email: string, password: string) => {
+const logInWithEmailAndPassword = async (email: string, password: string) => {
 	try {
 		await signInWithEmailAndPassword(auth, email, password)
 	} catch (err: any) {
@@ -68,7 +68,7 @@ const logInWithEmailAndPassword = async(email: string, password: string) => {
 	}
 }
 
-const registerWithEmailAndPassword = async(name: string, email: string, password: string) => {
+const registerWithEmailAndPassword = async (name: string, email: string, password: string) => {
 	try {
 		const res = await createUserWithEmailAndPassword(auth, email, password)
 		await sendEmailVerification(res.user)
@@ -89,7 +89,7 @@ const registerWithEmailAndPassword = async(name: string, email: string, password
 	}
 }
 
-const sendPasswordReset = async(email: string) => {
+const sendPasswordReset = async (email: string) => {
 	try {
 		await sendPasswordResetEmail(auth, email)
 		alert('Password reset link sent!')
@@ -112,7 +112,7 @@ type OrderType = {
 	order: MealItemType[]
 }
 
-const writeOrder = async(order: OrderType) => {
+const writeOrder = async (order: OrderType) => {
 	if (!auth.currentUser) {
 		alert('You must be logged in to place an order!')
 		return

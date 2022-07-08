@@ -15,13 +15,20 @@
 	"plugins": ["react", "@typescript-eslint"],
 	"rules": {
 		"quotes": [2, "single"],
-		"space-before-function-paren": ["error", "never"],
 		"semi": ["error", "never"],
 		"no-tabs": ["error", { "allowIndentationTabs": true }],
 		"no-unused-expressions": "off",
 		"react/jsx-filename-extension": [1, { "extensions": [".ts", ".js", ".tsx", ".jsx"] }],
 		"indent": [2, "tab", { "SwitchCase": 1 }],
 		"quote-props": ["error", "as-needed"],
-		"@typescript-eslint/no-non-null-assertion": "off"
+		"@typescript-eslint/no-non-null-assertion": "off",
+		"space-before-function-paren": [
+			"error",
+			{
+				"anonymous": "always",
+				"named": "always",
+				"asyncArrow": "always"
+			}
+		]
 	}
 }
