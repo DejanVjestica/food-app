@@ -1,5 +1,4 @@
-/* eslint-disable no-tabs */
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { FirestoreContext } from './firestore-context'
 
 // firebase
@@ -17,7 +16,7 @@ export const FirestoreProvider = ({ children }: { children: React.ReactNode }) =
 
 	const docRef = collection(db, 'restaurants')
 
-	const getAllRestaurants = async () => {
+	const getRestaurantsAndTags = async () => {
 		setLoading(true)
 		const restaurants = await getDocs(docRef)
 		const items: RestaurantType[] = []
@@ -38,7 +37,7 @@ export const FirestoreProvider = ({ children }: { children: React.ReactNode }) =
 	}
 
 	useEffect(() => {
-		getAllRestaurants()
+		getRestaurantsAndTags()
 	}, [])
 
 	const setTagsForFiltering = (tag?: string) => {
@@ -69,7 +68,7 @@ export const FirestoreProvider = ({ children }: { children: React.ReactNode }) =
 	useEffect(() => {
 		setLoading(true)
 		if (selectedTag.length === 0) {
-			getAllRestaurants()
+			getRestaurantsAndTags()
 			return
 		}
 		filterRestaurantsByTag()
