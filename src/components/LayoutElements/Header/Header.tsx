@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 // font awesome
@@ -52,17 +52,19 @@ export const Header = () => {
 	return (
 		<>
 			<Wrapper as="header" className={[styles.header, buttonClasses].join(' ')}>
-				<Wrapper as='div' className={styles['header__action-wrapper-left']}>
-					{(pathname !== '/') && <Button variant='icon' modifier='is-no-border' onClick={handleClickBack}>
-						<FontAwesomeIcon icon={faArrowLeft} color={'white'}/>
-					</Button>}
-					<Button as='link' to={'/'}>
+				<Wrapper as="div" className={styles['header__action-wrapper-left']}>
+					{pathname !== '/' && (
+						<Button variant="icon" modifier="is-no-border" onClick={handleClickBack}>
+							<FontAwesomeIcon icon={faArrowLeft} color={'white'} />
+						</Button>
+					)}
+					<Button as="link" to={'/'}>
 						<h1 className={styles.headline}>Food app</h1>
 					</Button>
-				</ Wrapper>
+				</Wrapper>
 
-				<Wrapper as='div' className={styles['header__action-wrapper-right']}>
-					<Button onClick={openCartModal} variant='primary'>
+				<Wrapper as="div" className={styles['header__action-wrapper-right']}>
+					<Button onClick={openCartModal} variant="primary">
 						<span className={styles.icon}>
 							<FontAwesomeIcon icon={faCartShopping} />
 						</span>
@@ -70,10 +72,10 @@ export const Header = () => {
 						<span className={styles.badge}>{totalItems}</span>
 						<span className={styles.price}>{`${totalPrice.toFixed(2)} €`}</span>
 					</Button>
-					<Button onClick={openModal} variant='icon' modifier='is-no-border'>
+					<Button onClick={openModal} variant="icon" modifier="is-no-border">
 						<FontAwesomeIcon icon={faBars} />
 					</Button>
-					<Button as='link' to={'/upload'}>
+					<Button as="link" to={'/upload'}>
 						upload
 					</Button>
 				</Wrapper>

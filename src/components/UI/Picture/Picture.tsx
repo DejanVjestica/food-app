@@ -1,4 +1,3 @@
-import React from 'react'
 import { Img } from '../Img/Img'
 
 type PictureProps = React.ImgHTMLAttributes<HTMLImageElement> & Omit<React.ComponentProps<'img'>, 'srcSet'>

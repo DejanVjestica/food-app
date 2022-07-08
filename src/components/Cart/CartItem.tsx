@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 
@@ -52,14 +52,16 @@ export const CartItem = ({ item }: CartItemProps) => {
 			<p className={styles['cart-item__price']}>{priceEuro}</p>
 
 			<Wrapper as="div" className={styles['cart-item__actions']}>
-				{!showText && <Button variant='simple' onClick={showNoteHandler}>
-					{addNoteLabel}
-				</Button>}
+				{!showText && (
+					<Button variant="simple" onClick={showNoteHandler}>
+						{addNoteLabel}
+					</Button>
+				)}
 				<Wrapper as="div" className={styles['cart-item__actions-add-remove']}>
-					<Button variant='icon' onClick={removeItemHandler}>
+					<Button variant="icon" onClick={removeItemHandler}>
 						<FontAwesomeIcon icon={faMinus} />
 					</Button>
-					<Button variant='icon' onClick={addItemHandler}>
+					<Button variant="icon" onClick={addItemHandler}>
 						<FontAwesomeIcon icon={faPlus} />
 					</Button>
 				</Wrapper>

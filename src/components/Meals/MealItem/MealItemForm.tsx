@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 
 // Fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -72,7 +72,7 @@ export const MealItemForm = ({ item }: MealItemFormProps) => {
 				useInputConfig={quantityConfig}
 				retrieveValues={useInputQuantityData}
 			/>
-			<Button type="submit" variant='icon'>
+			<Button type="submit" variant="icon">
 				<FontAwesomeIcon icon={faAdd} />
 			</Button>
 		</Form>

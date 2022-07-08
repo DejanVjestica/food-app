@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 
 // components
 import { Spinner } from '../UI/Spinner/Spinner'
@@ -20,20 +20,16 @@ export const Restaurants = () => {
 	const { restaurantsList, loading } = useContext(FirestoreContext)
 
 	const restaurants = restaurantsList?.map((restaurant: RestaurantType, index) => {
-		return (
-			<RestaurantsItem key={index} restaurant={restaurant} id={index}></RestaurantsItem>
-		)
+		return <RestaurantsItem key={index} restaurant={restaurant} id={index}></RestaurantsItem>
 	})
 
 	return (
-		<Layout variant='sidebarLeft'>
+		<Layout variant="sidebarLeft">
 			<Sidebar />
 			<article className={styles.restaurants}>
 				{loading && <Spinner></Spinner>}
-				{!loading && restaurantsList && <ul className={styles.restaurants__list}>
-					{restaurants}
-				</ul>}
+				{!loading && restaurantsList && <ul className={styles.restaurants__list}>{restaurants}</ul>}
 			</article>
-		</ Layout>
+		</Layout>
 	)
 }

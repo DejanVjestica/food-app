@@ -1,5 +1,3 @@
-import React from 'react'
-
 // components
 import { Img } from '../../UI/Img/Img'
 import { MealItemForm } from './MealItemForm'

@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react'
+import { useRef, useContext } from 'react'
 
 // components
 import { Button } from '../UI/Button/Button'
@@ -35,16 +35,16 @@ export const CartNote = ({ cancelNote, id, note }: CartNoteProps) => {
 	return (
 		<Wrapper as="div" className={styles.note_action}>
 			<textarea className={styles.note_text} ref={noteRef} rows={5} cols={33} defaultValue={note}></textarea>
-			<Button variant='simple' onClick={addNoteHandler}>
+			<Button variant="simple" onClick={addNoteHandler}>
 				{buttonAddNoteLabel}
 			</Button>
 			{!note && (
-				<Button variant='simple' onClick={cancelNote}>
+				<Button variant="simple" onClick={cancelNote}>
 					Cancel
 				</Button>
 			)}
 			{note && (
-				<Button variant='simple' onClick={removeNoteHandler}>
+				<Button variant="simple" onClick={removeNoteHandler}>
 					Delete
 				</Button>
 			)}

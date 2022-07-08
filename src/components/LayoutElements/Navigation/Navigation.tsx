@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 
 // components
 import { ListItem } from '../../UI/ListItem/ListItem'
@@ -34,15 +34,15 @@ export const Navigation = ({ variant }: NavigationProps) => {
 	]
 	const items = NavItems.map(({ id, text, onClickHandler }) => (
 		<ListItem key={id}>
-			<Button variant='simple' modifier='is-color-white' onClick={onClickHandler}><span>{text}</span></Button>
+			<Button variant="simple" modifier="is-color-white" onClick={onClickHandler}>
+				<span>{text}</span>
+			</Button>
 		</ListItem>
 	))
 
 	return (
 		<nav className={[styles.navigation__default, styles[`navigation__${variant}`]].join(' ')}>
-			<ul className={styles.navigation__list}>
-				{items}
-			</ul>
+			<ul className={styles.navigation__list}>{items}</ul>
 		</nav>
 	)
 }

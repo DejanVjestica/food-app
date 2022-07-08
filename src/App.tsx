@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { Route, Routes, Outlet } from 'react-router-dom'
 
 // Components
@@ -27,14 +27,8 @@ export const App = () => {
 				<Route path="restaurants" element={<Outlet />}>
 					<Route index element={<Restaurants />} />
 					<Route path=":id" element={<AvailableMeals />} />
-
 				</Route>
-				<Route
-					path="*"
-					element={
-						<p>There&apos;s nothing here!</p>
-					}
-				/>
+				<Route path="*" element={<p>There&apos;s nothing here!</p>} />
 			</Routes>
 
 			{cartModal && <Cart></Cart>}

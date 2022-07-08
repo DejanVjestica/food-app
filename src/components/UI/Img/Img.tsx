@@ -1,10 +1,10 @@
-import React, { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 // types
 import { SrcSetItem } from '../../../types/use-srcSet.types'
 
 // custom hooks
-import { useSrcSet } from '../../../hooks/use-srcSet'
+import { useSrcSet } from '../../../hooks/useSrcSet'
 
 // components
 import { Spinner } from '../../UI/Spinner/Spinner'
@@ -27,14 +27,13 @@ export const Img = ({ srcsetdata = '', ...rest }: ImgProps) => {
 		img?.addEventListener('load', () => {
 			setIsLoading(false)
 		})
-	}
-	, [imageRef])
+	}, [imageRef])
 
 	if (!srcsetdata) {
 		return (
 			<>
 				{isLoading && <Spinner></Spinner>}
-				<img {...rest} ref={imageRef}/>
+				<img {...rest} ref={imageRef} />
 			</>
 		)
 	}

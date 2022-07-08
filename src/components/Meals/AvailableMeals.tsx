@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { FirestoreContext } from '../../context/Firestore/firestore-context'
@@ -35,8 +35,7 @@ export const AvailableMeals = () => {
 			return <MealItem key={index} meal={newMeal} />
 		})
 		setMeals(menuItems)
-	}
-	, [restaurantsList])
+	}, [restaurantsList])
 
 	return (
 		<Layout>

@@ -1,5 +1,3 @@
-import React from 'react'
-
 // styles
 import styles from './Stage.module.scss'
 
@@ -21,11 +19,7 @@ type StageProps = {
 export const Stage = ({ imgConfig }: StageProps) => {
 	return (
 		<Wrapper className={styles.stage}>
-			<Img
-				src={imgConfig?.src}
-				alt={imgConfig?.alt}
-				srcsetdata={imgConfig?.srcSet}>
-			</Img>
+			<Img src={imgConfig?.src} alt={imgConfig?.alt} srcsetdata={imgConfig?.srcSet}></Img>
 		</Wrapper>
 	)
 }

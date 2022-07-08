@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 // components
 import { Wrapper } from '../Helpers/Wrapper/Wrapper'
@@ -18,7 +18,7 @@ export const Cart = () => {
 	const { closeCartModal, cartItems, totalPrice, clearCart } = useContext(CartContext)
 
 	// state
-	const [openOrderForm, setOpenOrderForm] = React.useState(false)
+	const [openOrderForm, setOpenOrderForm] = useState(false)
 
 	const orderItems = cartItems.map((item) => <CartItem key={item.id} item={item} />)
 	const hasItems = cartItems.length > 0
@@ -44,13 +44,23 @@ export const Cart = () => {
 				{openOrderForm && hasItems && <CartOrderForm />}
 			</Wrapper>
 
-			{!openOrderForm && <Wrapper as="div" className={styles.cart__actions}>
-				{hasItems && <Button onClick={clearCart} variant='secondary'>Clear Cart</Button>}
-				<Button onClick={closeCartModal} variant='secondary'>
-					Close
-				</Button>
-				{hasItems && !openOrderForm && <Button variant='primary' onClick={onClickOrderHandler}>Order</Button>}
-			</Wrapper>}
+			{!openOrderForm && (
+				<Wrapper as="div" className={styles.cart__actions}>
+					{hasItems && (
+						<Button onClick={clearCart} variant="secondary">
+							Clear Cart
+						</Button>
+					)}
+					<Button onClick={closeCartModal} variant="secondary">
+						Close
+					</Button>
+					{hasItems && !openOrderForm && (
+						<Button variant="primary" onClick={onClickOrderHandler}>
+							Order
+						</Button>
+					)}
+				</Wrapper>
+			)}
 		</Modal>
 	)
 }

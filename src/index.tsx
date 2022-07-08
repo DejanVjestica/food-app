@@ -11,7 +11,7 @@ import { App } from './App'
 import './index.scss'
 
 // contexts
-import { SrcSetProvider } from './context/srcSet/srcSet-provider'
+import { SrcSetProvider } from './context/SrcSet/srcSet-provider'
 import { CartProvider } from './context/Cart/cart-provider'
 import { UserProvider } from './context/User/user-provider'
 import { FirestoreProvider } from './context/Firestore/firestore-provider'

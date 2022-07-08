@@ -1,4 +1,3 @@
-import React from 'react'
 import ReactDOM from 'react-dom'
 
 // Fontawesome
@@ -20,10 +19,13 @@ export const Modal = ({ children, element, closeModal }: ModalProps) => {
 	return ReactDOM.createPortal(
 		<aside className={styles.modal}>
 			<div className={styles.modal__content}>
-				<Button title='close' variant='icon' onClick={closeModal} >
-					<span className={styles['cancel-icon']}><FontAwesomeIcon icon={faClose} /></span>
+				<Button title="close" variant="icon" onClick={closeModal}>
+					<span className={styles['cancel-icon']}>
+						<FontAwesomeIcon icon={faClose} />
+					</span>
 				</Button>
-				{children}</div>
+				{children}
+			</div>
 		</aside>,
 		document.querySelector(element) as HTMLElement
 	)

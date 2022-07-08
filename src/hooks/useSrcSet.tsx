@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 type SrcSetItem = {
 	src: string
@@ -6,7 +6,7 @@ type SrcSetItem = {
 }
 
 export const useSrcSet = (srcSet: string | SrcSetItem[]) => {
-	const [srcSetState, setSrcSetState] = React.useState<string>('')
+	const [srcSetState, setSrcSetState] = useState<string>('')
 
 	useEffect(() => {
 		if (typeof srcSet === 'string') {

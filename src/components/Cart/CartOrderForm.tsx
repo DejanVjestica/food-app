@@ -1,5 +1,5 @@
 /* eslint-disable no-tabs */
-import React, { useState, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect, createRef } from 'react'
 
 // firebase
 import { writeOrder } from '../../firebase'
@@ -20,11 +20,11 @@ export const CartOrderForm = () => {
 	const { closeCartModal, cartItems, totalPrice, clearCart } = useContext(CartContext)
 
 	// Refs
-	const streetRef = React.createRef<HTMLInputElement>()
-	const hausNummerRef = React.createRef<HTMLInputElement>()
-	const nameRef = React.createRef<HTMLInputElement>()
-	const emailRef = React.createRef<HTMLInputElement>()
-	const telefonRef = React.createRef<HTMLInputElement>()
+	const streetRef = createRef<HTMLInputElement>()
+	const hausNummerRef = createRef<HTMLInputElement>()
+	const nameRef = createRef<HTMLInputElement>()
+	const emailRef = createRef<HTMLInputElement>()
+	const telefonRef = createRef<HTMLInputElement>()
 
 	// States
 	const [streetHasError, setStreetHasError] = useState(true)
@@ -37,11 +37,15 @@ export const CartOrderForm = () => {
 	// Effects
 	useEffect(() => {
 		const hasError = streetHasError || hausNumberHasError || nameHasError || emailHasError || telefonHasError
-		const fielsAreFilled = streetRef.current?.value && hausNummerRef.current?.value && nameRef.current?.value && emailRef.current?.value && telefonRef.current?.value
+		const fielsAreFilled =
+			streetRef.current?.value &&
+			hausNummerRef.current?.value &&
+			nameRef.current?.value &&
+			emailRef.current?.value &&
+			telefonRef.current?.value
 
 		setFormHasError(hasError || !fielsAreFilled)
-	}
-	, [formHasError, streetHasError, hausNumberHasError, nameHasError, emailHasError, telefonHasError])
+	}, [formHasError, streetHasError, hausNumberHasError, nameHasError, emailHasError, telefonHasError])
 
 	// Street name input config, and dataHandler
 	const streetValidationHandler = (value: string) => value.trim() !== ''
@@ -94,7 +98,8 @@ export const CartOrderForm = () => {
 
 	// Email input config, and dataHandler
 	const emailValidationHandler = (value: string) => {
-		const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+		const emailRegex =
+			/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 		return emailRegex.test(value)
 	}
 
@@ -166,16 +171,16 @@ export const CartOrderForm = () => {
 				<Input
 					ref={streetRef}
 					type="text"
-					label='Street name'
-					id='street'
+					label="Street name"
+					id="street"
 					useInputConfig={configStreet}
 					retrieveValues={useInputStreetData}
 				/>
 				<Input
 					ref={hausNummerRef}
 					type="number"
-					label='Haus number'
-					id='hausNumber'
+					label="Haus number"
+					id="hausNumber"
 					useInputConfig={configHausNumber}
 					retrieveValues={useInputHausNumberData}
 				/>
@@ -186,9 +191,33 @@ export const CartOrderForm = () => {
 			</fieldset>
 			<fieldset>
 				<legend>Personal data</legend>
-				<Input ref={nameRef} type='text' placeholder='Name' label='Name' id='Name' useInputConfig={configName} retrieveValues={useInputNameData}/>
-				<Input ref={emailRef} type='email' placeholder='Email' label='Email' id='email' useInputConfig={configEmail} retrieveValues={useInputEmailData}/>
-				<Input ref={telefonRef} type='tel' placeholder='Telefon' label='Telefon' id='Telefon' useInputConfig={configTelefon} retrieveValues={useInputTelefonData}/>
+				<Input
+					ref={nameRef}
+					type="text"
+					placeholder="Name"
+					label="Name"
+					id="Name"
+					useInputConfig={configName}
+					retrieveValues={useInputNameData}
+				/>
+				<Input
+					ref={emailRef}
+					type="email"
+					placeholder="Email"
+					label="Email"
+					id="email"
+					useInputConfig={configEmail}
+					retrieveValues={useInputEmailData}
+				/>
+				<Input
+					ref={telefonRef}
+					type="tel"
+					placeholder="Telefon"
+					label="Telefon"
+					id="Telefon"
+					useInputConfig={configTelefon}
+					retrieveValues={useInputTelefonData}
+				/>
 			</fieldset>
 			<fieldset>
 				<legend>Payment</legend>
@@ -198,10 +227,10 @@ export const CartOrderForm = () => {
 					<option value="paypal">PayPal</option>
 				</select> */}
 			</fieldset>
-			<Button variant='secondary' onClick={onClearCartHandler} >
+			<Button variant="secondary" onClick={onClearCartHandler}>
 				clear cart
 			</Button>
-			<Button variant='primary' type="submit">
+			<Button variant="primary" type="submit">
 				Order {`${totalPrice.toFixed(2)} €`}
 			</Button>
 		</Form>

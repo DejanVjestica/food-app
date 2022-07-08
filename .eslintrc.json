@@ -22,13 +22,8 @@
 		"indent": [2, "tab", { "SwitchCase": 1 }],
 		"quote-props": ["error", "as-needed"],
 		"@typescript-eslint/no-non-null-assertion": "off",
-		"space-before-function-paren": [
-			"error",
-			{
-				"anonymous": "always",
-				"named": "always",
-				"asyncArrow": "always"
-			}
-		]
+		"space-before-function-paren": ["error", "always"],
+		"react/react-in-jsx-scope": "off",
+		"react/jsx-no-undef": "off"
 	}
 }

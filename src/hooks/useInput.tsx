@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useEffect } from 'react'
+import { useReducer, useState, useEffect } from 'react'
 
 // Types
 import { UseInputConfigType, UseInputReturnType, UseInputReducerAction, UseInputStateType } from '../types/use-input.types'
